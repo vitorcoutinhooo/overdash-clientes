@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import { IMG } from "@/lib/site-data";
 import { trackLead } from "@/lib/pixel";
+import { ga4Lead } from "@/lib/ga4";
 import { withUtms } from "@/lib/utm";
 
 const PHONE = "5544991689022";
@@ -112,7 +113,7 @@ function PrimaryCta({ campaign, label, hint }: { campaign: string; label: string
       )}
       target="_blank"
       rel="noopener"
-      onClick={() => trackLead(`bio_${campaign}`)}
+      onClick={() => { trackLead(`bio_${campaign}`); ga4Lead(`bio_${campaign}`, window.location.pathname); }}
       className="flex w-full flex-col items-center rounded-full px-6 py-4 text-center text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5"
       style={{ backgroundImage: "var(--gradient-cta)", boxShadow: "var(--shadow-lift)" }}
     >
@@ -272,7 +273,7 @@ export function RubianaRamosBioPage() {
                   href={whatsappUrl(rota.msg, `rota_${rota.k}`)}
                   target="_blank"
                   rel="noopener"
-                  onClick={() => trackLead(`bio_rota_${rota.k}`)}
+                  onClick={() => { trackLead(`bio_rota_${rota.k}`); ga4Lead(`bio_rota_${rota.k}`, window.location.pathname); }}
                   className="mt-3 flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3.5 text-sm font-semibold tracking-wide text-primary-foreground uppercase"
                 >
                   <MessageCircle className="h-4 w-4" /> Enviar no WhatsApp

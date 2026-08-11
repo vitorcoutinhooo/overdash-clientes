@@ -1,5 +1,6 @@
 import { cn } from "@/lib/utils";
 import { trackLead } from "@/lib/pixel";
+import { ga4Lead } from "@/lib/ga4";
 
 type Props = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   variant?: "solid" | "ghost" | "dark";
@@ -10,6 +11,7 @@ export function Cta({ variant = "solid", block = true, className, onClick, href,
   function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
     if (href?.includes("whatsapp.com")) {
       trackLead("cta_whatsapp_lp");
+      ga4Lead("cta_whatsapp_lp", window.location.pathname);
     }
     onClick?.(e);
   }
