@@ -1,33 +1,21 @@
 import { useState, useRef, useCallback } from "react";
 import { IMG } from "@/lib/site-data";
 
-const CAPTIONS = [
-  { tech: "Deep Plane", note: "Reposicionamento de terço médio e inferior. Foto de 3 meses." },
-  { tech: "Deep Plane", note: "Contorno de mandíbula e pescoço. Foto de 6 meses." },
-  { tech: "Deep Plane", note: "Perfil — papada e terço inferior. Foto de 4 meses." },
-  { tech: "Deep Plane", note: "Perfil lateral — redefinição de contorno. Foto de 5 meses." },
-  { tech: "Deep Plane", note: "Papada e pescoço. Menor downtime, foto de 90 dias." },
-  { tech: "Deep Plane + Nanofat", note: "Reposicionamento + volume com gordura própria. Foto de 6 meses." },
-  { tech: "Deep Plane", note: "Flacidez de terço médio e inferior. Foto de 4 meses." },
-  { tech: "Deep Plane", note: "Perfil — harmonização de contorno facial. Foto de 5 meses." },
-  { tech: "Deep Plane", note: "Queixo e pescoço. Resultado natural e duradouro. Foto de 3 meses." },
-  { tech: "Deep Plane + Nanofat", note: "Terço médio + regeneração. Foto de 4 meses." },
-  { tech: "Deep Plane", note: "Perfil — papada, pescoço e mandíbula. Foto de 6 meses." },
-  { tech: "Nanofat", note: "Textura, viço e uniformidade da pele. Foto de 90 dias." },
-  { tech: "Deep Plane", note: "Terço médio e inferior — resultado expressivo. Foto de 5 meses." },
-  { tech: "Deep Plane", note: "Pescoço e queixo. Recuperação social em ~14 dias. Foto de 3 meses." },
-  { tech: "Deep Plane", note: "Flacidez generalizada. Reposicionamento profundo. Foto de 6 meses." },
-  { tech: "Deep Plane + Nanofat", note: "Volume e contorno com gordura própria. Foto de 4 meses." },
-];
+const total = IMG.results.length;
+
+function mod(n: number, m: number) {
+  return ((n % m) + m) % m;
+}
 
 export function ResultsCarousel() {
   const [current, setCurrent] = useState(0);
-  const total = IMG.results.length;
-
   const touchStart = useRef<number | null>(null);
 
-  const prev = useCallback(() => setCurrent((c) => (c - 1 + total) % total), [total]);
-  const next = useCallback(() => setCurrent((c) => (c + 1) % total), [total]);
+  const prev = useCallback(() => setCurrent((c) => mod(c - 1, total)), []);
+  const next = useCallback(() => setCurrent((c) => mod(c + 1, total)), []);
+
+  const prevIdx = mod(current - 1, total);
+  const nextIdx = mod(current + 1, total);
 
   const onTouchStart = (e: React.TouchEvent) => {
     touchStart.current = e.touches[0].clientX;
@@ -39,31 +27,95 @@ export function ResultsCarousel() {
     touchStart.current = null;
   };
 
-  const caption = CAPTIONS[current] ?? CAPTIONS[0];
-
   return (
-    <section id="resultados" className="border-b border-border bg-card">
+    <section id="resultados" className="border-b border-border bg-ink overflow-hidden">
       <div className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
-        <p className="eyebrow">Resultados</p>
-        <h2 className="mt-3 max-w-[28ch] text-[2rem] md:text-[3.1rem]">
+
+        {/* Header */}
+        <p className="font-mono text-[0.6rem] tracking-[0.16em] uppercase text-rose">
+          Resultados
+        </p>
+        <h2 className="mt-3 max-w-[28ch] text-[2rem] text-cream md:text-[3.1rem]">
           Antes e depois com o que ninguém coloca: contexto.
         </h2>
-        <p className="mt-4 max-w-[58ch] text-[0.95rem] leading-relaxed text-muted-foreground">
-          Técnica, tempo de pós-operatório e o que <b className="text-ink">não</b> foi feito. Foto
-          sem legenda não é prova, é enfeite.
+        <p className="mt-4 max-w-[58ch] text-[0.95rem] leading-relaxed text-cream/60">
+          Técnica, tempo de pós-operatório e o que <b className="text-cream">não</b> foi feito.
+          Foto sem legenda não é prova, é enfeite.
         </p>
 
-        {/* Carousel */}
-        <div className="mt-9 relative" onTouchStart={onTouchStart} onTouchEnd={onTouchEnd}>
-          {/* Main image */}
-          <div className="overflow-hidden rounded-2xl border border-border bg-muted shadow-card">
+        {/* Cards stage */}
+        <div
+          className="relative mt-10 flex items-center justify-center"
+          onTouchStart={onTouchStart}
+          onTouchEnd={onTouchEnd}
+          style={{ height: "clamp(260px, 44vw, 520px)" }}
+        >
+          {/* Prev */}
+          <div
+            onClick={prev}
+            className="absolute cursor-pointer overflow-hidden rounded-[1.8rem] border border-white/10"
+            style={{
+              width: "clamp(200px, 38vw, 460px)",
+              aspectRatio: "1 / 1",
+              height: "clamp(200px, 38vw, 460px)",
+              maxHeight: "100%",
+              left: "50%",
+              transform: "translateX(calc(-50% - clamp(140px, 28vw, 320px))) scale(0.82)",
+              transformOrigin: "right center",
+              opacity: 0.4,
+              filter: "blur(2px)",
+              transition: "all 0.35s cubic-bezier(.4,0,.2,1)",
+              zIndex: 1,
+            }}
+          >
+            <img src={IMG.results[prevIdx]} alt="" className="h-full w-full object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-ink/50" />
+          </div>
+
+          {/* Center */}
+          <div
+            className="relative overflow-hidden rounded-[1.8rem] border border-white/20 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.9)]"
+            style={{
+              width: "clamp(200px, 38vw, 460px)",
+              aspectRatio: "1 / 1",
+              height: "clamp(200px, 38vw, 460px)",
+              maxHeight: "100%",
+              zIndex: 10,
+              transition: "all 0.35s cubic-bezier(.4,0,.2,1)",
+            }}
+          >
             <img
               key={current}
               src={IMG.results[current]}
-              alt={`Resultado real — ${caption.tech} — Instituto Ramoniê`}
-              className="w-full object-cover max-h-[680px]"
+              alt={`Caso real Instituto Ramoniê — antes e depois`}
+              className="h-full w-full object-cover"
               loading="lazy"
             />
+            <div className="absolute top-3 right-3 rounded-full bg-black/40 px-2.5 py-1 font-mono text-[0.58rem] tracking-widest text-white/70 backdrop-blur">
+              {current + 1} / {total}
+            </div>
+          </div>
+
+          {/* Next */}
+          <div
+            onClick={next}
+            className="absolute cursor-pointer overflow-hidden rounded-[1.8rem] border border-white/10"
+            style={{
+              width: "clamp(200px, 38vw, 460px)",
+              aspectRatio: "1 / 1",
+              height: "clamp(200px, 38vw, 460px)",
+              maxHeight: "100%",
+              left: "50%",
+              transform: "translateX(calc(-50% + clamp(140px, 28vw, 320px))) scale(0.82)",
+              transformOrigin: "left center",
+              opacity: 0.4,
+              filter: "blur(2px)",
+              transition: "all 0.35s cubic-bezier(.4,0,.2,1)",
+              zIndex: 1,
+            }}
+          >
+            <img src={IMG.results[nextIdx]} alt="" className="h-full w-full object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-ink/50" />
           </div>
 
           {/* Arrows */}
@@ -71,9 +123,9 @@ export function ResultsCarousel() {
             type="button"
             aria-label="Anterior"
             onClick={prev}
-            className="absolute left-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/90 text-ink shadow-soft backdrop-blur transition-opacity hover:opacity-90 md:h-12 md:w-12"
+            className="absolute left-0 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur hover:bg-white/20 transition-colors"
           >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden>
               <path d="M12.5 15l-5-5 5-5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
@@ -81,50 +133,32 @@ export function ResultsCarousel() {
             type="button"
             aria-label="Próximo"
             onClick={next}
-            className="absolute right-3 top-1/2 -translate-y-1/2 flex h-10 w-10 items-center justify-center rounded-full border border-border bg-card/90 text-ink shadow-soft backdrop-blur transition-opacity hover:opacity-90 md:h-12 md:w-12"
+            className="absolute right-0 z-20 flex h-10 w-10 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white backdrop-blur hover:bg-white/20 transition-colors"
           >
-            <svg width="20" height="20" viewBox="0 0 20 20" fill="none" aria-hidden>
+            <svg width="18" height="18" viewBox="0 0 20 20" fill="none" aria-hidden>
               <path d="M7.5 5l5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
             </svg>
           </button>
-
-          {/* Counter badge */}
-          <div className="absolute bottom-4 right-4 rounded-full border border-border bg-card/90 px-3 py-1 font-mono text-[0.6rem] tracking-[0.1em] text-muted-foreground backdrop-blur">
-            {current + 1} / {total}
-          </div>
-        </div>
-
-        {/* Caption */}
-        <div className="mt-4 flex items-start justify-between gap-4">
-          <div>
-            <p className="font-mono text-[0.6rem] tracking-[0.12em] uppercase text-rose">
-              Caso real · {caption.tech}
-            </p>
-            <p className="mt-1 text-xs leading-relaxed text-muted-foreground">{caption.note}</p>
-          </div>
-          <p className="shrink-0 text-xs text-muted-foreground/60 mt-0.5">
-            Autorização por escrito
-          </p>
         </div>
 
         {/* Dots */}
-        <div className="mt-5 flex flex-wrap gap-1.5 justify-center">
+        <div className="mt-7 flex flex-wrap justify-center gap-1.5">
           {IMG.results.map((_, i) => (
             <button
               key={i}
               type="button"
-              aria-label={`Ir para resultado ${i + 1}`}
+              aria-label={`Resultado ${i + 1}`}
               onClick={() => setCurrent(i)}
               className={
                 i === current
                   ? "h-2 w-6 rounded-full bg-rose transition-all"
-                  : "h-2 w-2 rounded-full bg-border transition-all hover:bg-rose/40"
+                  : "h-2 w-2 rounded-full bg-white/20 transition-all hover:bg-rose/50"
               }
             />
           ))}
         </div>
 
-        <p className="mt-6 max-w-[80ch] text-xs leading-relaxed text-muted-foreground">
+        <p className="mt-7 max-w-[80ch] text-xs leading-relaxed text-cream/35">
           Imagens publicadas com autorização por escrito. Resultados variam conforme anatomia, idade
           e cicatrização. A avaliação define o que é possível no seu caso. Conteúdo educativo.
         </p>
