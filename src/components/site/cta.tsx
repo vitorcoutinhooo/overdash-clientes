@@ -1,13 +1,23 @@
 import { cn } from "@/lib/utils";
+import { trackLead } from "@/lib/pixel";
 
 type Props = React.AnchorHTMLAttributes<HTMLAnchorElement> & {
   variant?: "solid" | "ghost" | "dark";
   block?: boolean;
 };
 
-export function Cta({ variant = "solid", block = true, className, ...rest }: Props) {
+export function Cta({ variant = "solid", block = true, className, onClick, href, ...rest }: Props) {
+  function handleClick(e: React.MouseEvent<HTMLAnchorElement>) {
+    if (href?.includes("whatsapp.com")) {
+      trackLead("cta_whatsapp_lp");
+    }
+    onClick?.(e);
+  }
+
   return (
     <a
+      href={href}
+      onClick={handleClick}
       {...rest}
       className={cn(
         "inline-flex min-h-[52px] items-center justify-center gap-2 rounded-full px-6 py-3.5 text-center text-[0.9rem] font-medium tracking-[0.06em] uppercase transition-all duration-300",

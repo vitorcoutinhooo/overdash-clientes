@@ -1,10 +1,21 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { useEffect } from "react";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { RubianaRamosPage } from "@/pages/rubianaramos";
 import { RubianaRamosBioPage } from "@/pages/rubianaramos-bio";
+import { trackPageView } from "@/lib/pixel";
+
+function PixelRouteTracker() {
+  const location = useLocation();
+  useEffect(() => {
+    trackPageView();
+  }, [location.pathname]);
+  return null;
+}
 
 export function App() {
   return (
     <BrowserRouter>
+      <PixelRouteTracker />
       <Routes>
         <Route path="/rubianaramos" element={<RubianaRamosPage />} />
         <Route path="/rubianaramos-bio" element={<RubianaRamosBioPage />} />

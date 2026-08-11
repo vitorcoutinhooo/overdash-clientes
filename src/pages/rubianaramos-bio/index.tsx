@@ -10,6 +10,8 @@ import {
   ShieldCheck,
 } from "lucide-react";
 import { IMG } from "@/lib/site-data";
+import { trackLead } from "@/lib/pixel";
+import { withUtms } from "@/lib/utm";
 
 const PHONE = "5544991689022";
 const LP_URL = "https://clientes.overdash.com.br/rubianaramos";
@@ -110,6 +112,7 @@ function PrimaryCta({ campaign, label, hint }: { campaign: string; label: string
       )}
       target="_blank"
       rel="noopener"
+      onClick={() => trackLead(`bio_${campaign}`)}
       className="flex w-full flex-col items-center rounded-full px-6 py-4 text-center text-primary-foreground transition-transform duration-200 hover:-translate-y-0.5"
       style={{ backgroundImage: "var(--gradient-cta)", boxShadow: "var(--shadow-lift)" }}
     >
@@ -156,6 +159,10 @@ function GhostLink({
 
 export function RubianaRamosBioPage() {
   const [rota, setRota] = useState<(typeof rotas)[number] | null>(null);
+  // Forward any UTMs from the current URL (e.g. from an ad or retargeting link)
+  // to the LP so Meta Pixel on the LP sees the same source attribution.
+  const lpUrl = withUtms(LP_URL);
+  const lpConteudos = conteudos.map((c) => ({ ...c, href: lpUrl }));
 
   return (
     <div className="bio-page">
@@ -214,7 +221,7 @@ export function RubianaRamosBioPage() {
           {/* Ver a LP completa */}
           <section className="mt-4">
             <a
-              href={LP_URL}
+              href={lpUrl}
               target="_blank"
               rel="noopener"
               className="flex w-full items-center justify-center gap-2 rounded-full border border-primary/50 bg-card px-6 py-3.5 text-[14px] font-medium tracking-wide text-primary transition-colors hover:bg-blush"
@@ -265,6 +272,7 @@ export function RubianaRamosBioPage() {
                   href={whatsappUrl(rota.msg, `rota_${rota.k}`)}
                   target="_blank"
                   rel="noopener"
+                  onClick={() => trackLead(`bio_rota_${rota.k}`)}
                   className="mt-3 flex items-center justify-center gap-2 rounded-full bg-whatsapp px-5 py-3.5 text-sm font-semibold tracking-wide text-primary-foreground uppercase"
                 >
                   <MessageCircle className="h-4 w-4" /> Enviar no WhatsApp
@@ -293,7 +301,7 @@ export function RubianaRamosBioPage() {
             </div>
 
             <GhostLink
-              href={LP_URL}
+              href={lpUrl}
               title="Ver todos os resultados"
               sub="Galeria completa, por procedimento e tempo de pós"
             />
@@ -309,7 +317,7 @@ export function RubianaRamosBioPage() {
             <p className="bio-eyebrow text-center">Antes de decidir</p>
             <h2 className="mt-2 text-center text-[22px]">Entenda o procedimento.</h2>
             <div className="mt-5 flex flex-col gap-2.5">
-              {conteudos.map((c) => (
+              {lpConteudos.map((c) => (
                 <GhostLink key={c.title} href={c.href} title={c.title} sub={c.sub} flush />
               ))}
             </div>
