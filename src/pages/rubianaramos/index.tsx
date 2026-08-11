@@ -8,7 +8,7 @@ import { Faq } from "@/components/site/faq";
 
 const TICKER = [
   `${CLINIC.crm} · ${CLINIC.doctor}`,
-  "Avaliação presencial com a médica — não com consultora",
+  "Avaliação presencial com a médica, não com consultora",
   "Centro cirúrgico equipado + anestesista",
   "Acompanhamento por 12 meses",
   `${CLINIC.city}`,
@@ -37,7 +37,7 @@ const PROCEDURES = [
     specs: [
       ["Indicado", "Gordura localizada + definição, rotina agitada"],
       ["Duração", "Definida na avaliação"],
-      ["Recuperação", "Reduzida — retorno rápido à rotina"],
+      ["Recuperação", "Reduzida, retorno rápido à rotina"],
       ["Anestesia", "Local ou sedação"],
     ],
   },
@@ -61,7 +61,7 @@ const JOURNEY = [
   ["02", "Plano por escrito", "Técnica, condições, riscos e data. Você sai com o documento."],
   ["03", "Pré-operatório", "Exames e liberação. Orientação enviada por escrito."],
   ["04", "Dia do procedimento", "Centro cirúrgico com anestesista presente."],
-  ["05", "Acompanhamento", "Retornos em 7, 30, 90 dias e 12 meses — inclusos."],
+  ["05", "Acompanhamento", "Retornos em 7, 30, 90 dias e 12 meses, inclusos."],
 ];
 
 function Chip({ title, text }: { title: string; text: string }) {
@@ -146,7 +146,7 @@ export function RubianaRamosPage() {
             </h1>
             <p className="mt-6 max-w-[54ch] text-[1rem] leading-relaxed text-muted-foreground">
               <b className="text-ink">Lifting Deep Plane:</b> reposiciona as estruturas profundas
-              que perderam sustentação. Não estica a pele — devolve ao lugar o que o tempo tirou. O
+              que perderam sustentação. Não estica a pele. Devolve ao lugar o que o tempo tirou. O
               resultado é aquele que ninguém identifica exatamente, mas todo mundo percebe.
             </p>
 
@@ -217,7 +217,7 @@ export function RubianaRamosPage() {
           <p className="eyebrow">Tratamentos</p>
           <h2 className="mt-3 text-[2rem] md:text-[3.1rem]">Três técnicas. Uma decisão.</h2>
           <p className="mt-4 max-w-[58ch] text-[0.95rem] leading-relaxed text-muted-foreground">
-            Cada card responde as perguntas que você faria na consulta — antes de marcar a consulta.
+            Cada card responde as perguntas que você faria na consulta, antes de marcar a consulta.
           </p>
 
           <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -305,7 +305,7 @@ export function RubianaRamosPage() {
                   ],
                   [
                     'Aspecto "esticado"',
-                    "Não — o tecido é reposicionado, não tracionado",
+                    "Não. O tecido é reposicionado, não tracionado",
                     "Risco maior de tração visível",
                     "Não corrige flacidez estrutural",
                     0,
@@ -360,7 +360,7 @@ export function RubianaRamosPage() {
           </h2>
           <p className="mt-4 max-w-[58ch] text-[0.95rem] leading-relaxed text-muted-foreground">
             Técnica, tempo de pós-operatório e o que <b className="text-ink">não</b> foi feito. Foto
-            sem legenda não é prova — é enfeite.
+            sem legenda não é prova, é enfeite.
           </p>
 
           <div className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -391,7 +391,7 @@ export function RubianaRamosPage() {
           </div>
           <p className="mt-6 max-w-[80ch] text-xs leading-relaxed text-muted-foreground">
             Imagens publicadas com autorização por escrito das pacientes. Resultados variam conforme
-            anatomia, idade e cicatrização — a avaliação define o que é possível no seu caso.
+            anatomia, idade e cicatrização. A avaliação define o que é possível no seu caso.
             Conteúdo de caráter educativo.
           </p>
         </div>
@@ -449,7 +449,7 @@ export function RubianaRamosPage() {
 
           <p className="mt-8 max-w-[56ch] text-[0.95rem] leading-relaxed text-cream/70">
             É aquele tipo de resultado que faz as pessoas comentarem{" "}
-            <i>"você está diferente… mais leve, mais bonita"</i> — sem conseguir dizer exatamente o
+            <i>"você está diferente… mais leve, mais bonita"</i>, sem conseguir dizer exatamente o
             porquê.
           </p>
           <p className="mt-6 max-w-[24ch] font-display text-[1.6rem] text-gold">
@@ -468,11 +468,11 @@ export function RubianaRamosPage() {
             </h2>
             <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
               A consulta não é uma etapa burocrática antes do procedimento. É onde se decide{" "}
-              <b className="text-ink">se</b> o procedimento faz sentido para você — e essa é a parte
+              <b className="text-ink">se</b> o procedimento faz sentido para você, e essa é a parte
               mais valiosa.
             </p>
             <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
-              Cada rosto tem uma história. E cada tratamento deve respeitar essa individualidade — o
+              Cada rosto tem uma história. E cada tratamento deve respeitar essa individualidade, o
               que só é possível depois de olhar o seu.
             </p>
             <div className="mt-7 max-w-md">
@@ -484,7 +484,7 @@ export function RubianaRamosPage() {
                 Agendar minha avaliação
               </Cta>
               <p className="mt-3 text-xs text-muted-foreground">
-                A agenda tem vagas limitadas por semana — a disponibilidade é confirmada no
+                A agenda tem vagas limitadas por semana. A disponibilidade é confirmada no
                 WhatsApp.
               </p>
             </div>
@@ -606,8 +606,6 @@ export function RubianaRamosPage() {
             <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
               {CLINIC.addressLine}
               <br />
-              {CLINIC.addressComplement}
-              <br />
               {CLINIC.city} · CEP {CLINIC.zip}
             </p>
             <div className="mt-5 grid gap-2.5">
@@ -647,7 +645,7 @@ export function RubianaRamosPage() {
             O melhor resultado é aquele que faz você se olhar no espelho e se reconhecer novamente.
           </h2>
           <p className="mx-auto mt-5 max-w-[52ch] text-[0.95rem] leading-relaxed text-muted-foreground">
-            Meu compromisso é que você saia daqui não apenas mais bonita — mas mais confiante, leve
+            Meu compromisso é que você saia daqui não apenas mais bonita, mas mais confiante, leve
             e segura da mulher que você é.
           </p>
           <div className="mx-auto mt-8 max-w-sm">
@@ -686,8 +684,6 @@ export function RubianaRamosPage() {
               Endereço
             </b>
             {CLINIC.addressLine}
-            <br />
-            {CLINIC.addressComplement}
             <br />
             {CLINIC.city} · {CLINIC.zip}
           </div>

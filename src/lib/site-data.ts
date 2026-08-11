@@ -5,14 +5,13 @@ export const CLINIC = {
   phoneDisplay: "(44) 99168-9022",
   whatsapp: "5544991689022",
   addressLine: "R. Santos Dumont, 3196 — Zona 01",
-  addressComplement: "Centro Empresarial José Barão",
   city: "Maringá — PR",
   zip: "87013-050",
   hours: "Segunda a sexta · até 18h",
   rating: "5,0",
   reviews: 14,
   mapsQuery:
-    "Instituto+Ramoni%C3%AA+R.+Santos+Dumont,+3196+-+Zona+01,+Maring%C3%A1+-+PR,+87013-050",
+    "R.+Santos+Dumont+3196+Zona+01+Maring%C3%A1+PR+87013-050",
 } as const;
 
 export function wa(message: string) {

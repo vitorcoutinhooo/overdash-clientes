@@ -196,7 +196,7 @@ export function RubianaRamosBioPage() {
             </p>
             <p className="mx-auto mt-4 max-w-[34ch] text-[15px] leading-relaxed text-muted-foreground">
               Lifting Facial <strong className="font-semibold text-foreground">Deep Plane</strong>.
-              Reposiciono estrutura — não estico pele.
+              Reposiciono estrutura, não estico pele.
             </p>
 
             <div className="mt-5 flex flex-wrap justify-center gap-2">
@@ -236,7 +236,7 @@ export function RubianaRamosBioPage() {
             <p className="bio-eyebrow text-center">Ainda em dúvida?</p>
             <h2 className="mt-2 text-center text-[22px]">Me diga o que te trouxe aqui.</h2>
             <p className="mx-auto mt-2 max-w-[36ch] text-center text-sm text-muted-foreground">
-              Você chega no WhatsApp com a pergunta já feita — e recebe a resposta certa de primeira.
+              Você chega no WhatsApp com a pergunta já feita e recebe a resposta certa de primeira.
             </p>
 
             <div className="mt-5 flex flex-col gap-2.5">

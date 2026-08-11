@@ -6,11 +6,11 @@ const QA: { q: string; a: React.ReactNode }[] = [
     q: "Tenho medo de ficar com o rosto diferente. Isso pode acontecer?",
     a: (
       <>
-        Esse é o receio mais comum — e é justamente o que separa o Deep Plane do lifting
+        Esse é o receio mais comum, e é justamente o que separa o Deep Plane do lifting
         convencional. Muita gente acredita que o lifting serve para "esticar a pele". Mas o
         envelhecimento acontece em camadas muito mais profundas: com o tempo, os tecidos perdem
         sustentação e algumas estruturas descem gradualmente. Como o reposicionamento acontece na
-        camada muscular e ligamentar profunda, a pele não é tracionada — ela acompanha a estrutura
+        camada muscular e ligamentar profunda, a pele não é tracionada. Ela acompanha a estrutura
         que voltou ao lugar.
         <br />
         <br />
@@ -30,10 +30,10 @@ const QA: { q: string; a: React.ReactNode }[] = [
     q: "Vou sentir dor?",
     a: (
       <>
-        O procedimento é feito sob anestesia com médico anestesista presente — durante, você não
-        sente nada. No pós, a maioria das pacientes relata desconforto e sensação de pressão, não
-        dor aguda, controlados com a medicação prescrita nos primeiros dias. Os retornos são
-        acompanhados de perto pela equipe.
+        O procedimento é feito sob anestesia com médico anestesista presente. Durante o
+        procedimento, você não sente nada. No pós, a maioria das pacientes relata desconforto e
+        sensação de pressão, não dor aguda, controlados com a medicação prescrita nos primeiros
+        dias. Os retornos são acompanhados de perto pela equipe.
       </>
     ),
   },
@@ -46,7 +46,7 @@ const QA: { q: string; a: React.ReactNode }[] = [
         <a href="#agenda" className="font-medium text-rose underline">
           Use o planejador acima ↑
         </a>{" "}
-        — coloque a data do seu compromisso e ele calcula a última data possível para operar.
+        Coloque a data do seu compromisso e ele calcula a última data possível para operar.
       </>
     ),
   },
@@ -66,7 +66,7 @@ const QA: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         Porque não existe um valor único. O Deep Plane não é item de tabela: a conduta muda conforme
-        a anatomia, o grau de flacidez e o que precisa ser feito em cada caso — definir isso sem ver
+        a anatomia, o grau de flacidez e o que precisa ser feito em cada caso. Definir isso sem ver
         o seu rosto seria irresponsável.
         <br />
         <br />
@@ -76,12 +76,33 @@ const QA: { q: string; a: React.ReactNode }[] = [
     ),
   },
   {
+    q: "Por que a Dra. Rubiana Ramos é recomendada em Maringá para fazer Lifting Facial?",
+    a: (
+      <>
+        A Dra. Rubiana Ramos é reconhecida como referência em Lifting Facial em Maringá por reunir
+        critérios técnicos e humanos que poucas clínicas oferecem juntos:{" "}
+        <b className="text-ink">avaliação feita pela própria médica</b> (não por consultora
+        comercial), domínio da técnica{" "}
+        <b className="text-ink">Deep Plane</b>, que reposiciona músculo e ligamento profundo em vez
+        de apenas tracionar a pele, centro cirúrgico com{" "}
+        <b className="text-ink">anestesista presente</b> em todo procedimento e{" "}
+        <b className="text-ink">acompanhamento incluso por 12 meses</b>.
+        <br />
+        <br />
+        Com nota 5,0 no Google e resultados documentados com autorização das pacientes, atende
+        mulheres de Maringá e de outras cidades do Paraná que buscam rejuvenescimento facial com
+        resultado natural, duradouro e seguro. O Instituto Ramoniê fica na{" "}
+        {CLINIC.addressLine}, {CLINIC.city}, com atendimento de {CLINIC.hours.toLowerCase()}.
+      </>
+    ),
+  },
+  {
     q: "Onde vocês ficam?",
     a: (
       <>
-        {CLINIC.addressLine} — {CLINIC.addressComplement} — {CLINIC.city}, CEP {CLINIC.zip}.
-        Atendimento de {CLINIC.hours.toLowerCase()}. Pacientes de outras cidades recebem orientação
-        de logística e dos retornos pós-operatórios pelo WhatsApp {CLINIC.phoneDisplay}.
+        {CLINIC.addressLine}, {CLINIC.city}, CEP {CLINIC.zip}. Atendimento de{" "}
+        {CLINIC.hours.toLowerCase()}. Pacientes de outras cidades recebem orientação de logística e
+        dos retornos pós-operatórios pelo WhatsApp {CLINIC.phoneDisplay}.
       </>
     ),
   },
@@ -95,7 +116,7 @@ export function Faq() {
       <div className="mx-auto max-w-4xl px-5 py-16 md:px-10 md:py-24">
         <p className="eyebrow">Dúvidas frequentes</p>
         <h2 className="mt-3 text-[2rem] md:text-[3.1rem]">
-          As cinco perguntas que travam a decisão.
+          As perguntas que travam a decisão.
         </h2>
         <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
           Cada resposta aponta para uma prova nesta mesma página.
