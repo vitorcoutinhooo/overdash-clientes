@@ -30,10 +30,9 @@ const QA: { q: string; a: React.ReactNode }[] = [
     q: "Vou sentir dor?",
     a: (
       <>
-        O procedimento é feito sob anestesia com médico anestesista presente. Durante o
-        procedimento, você não sente nada. No pós, a maioria das pacientes relata desconforto e
-        sensação de pressão, não dor aguda, controlados com a medicação prescrita nos primeiros
-        dias. Os retornos são acompanhados de perto pela equipe.
+        Durante o procedimento, você não sente nada. No pós-operatório, a maioria das pacientes
+        relata desconforto e sensação de pressão, não dor aguda, controlados com a medicação
+        prescrita nos primeiros dias. Os retornos são acompanhados de perto pela equipe.
       </>
     ),
   },
@@ -42,11 +41,7 @@ const QA: { q: string; a: React.ReactNode }[] = [
     a: (
       <>
         Depende da técnica. Para o Deep Plane, a recuperação social costuma ser de ~14 dias e a
-        plena em 30.{" "}
-        <a href="#agenda" className="font-medium text-rose underline">
-          Use o planejador acima ↑
-        </a>{" "}
-        Coloque a data do seu compromisso e ele calcula a última data possível para operar.
+        plena em 30. A avaliação define o melhor timing conforme a sua agenda.
       </>
     ),
   },
@@ -57,7 +52,7 @@ const QA: { q: string; a: React.ReactNode }[] = [
         O resultado aparece de forma progressiva. Aos 30 dias já se observa mais harmonia facial;
         aos 40, definição de mandíbula e melhora do pescoço. O edema reduz gradativamente, os
         tecidos se acomodam e o resultado segue evoluindo nos meses seguintes. No Deep Plane, a
-        permanência esperada é de 8 a 10 anos.
+        permanência esperada é de 10 a 15 anos.
       </>
     ),
   },
@@ -84,8 +79,7 @@ const QA: { q: string; a: React.ReactNode }[] = [
         <b className="text-ink">avaliação feita pela própria médica</b> (não por consultora
         comercial), domínio da técnica{" "}
         <b className="text-ink">Deep Plane</b>, que reposiciona músculo e ligamento profundo em vez
-        de apenas tracionar a pele, centro cirúrgico com{" "}
-        <b className="text-ink">anestesista presente</b> em todo procedimento e{" "}
+        de apenas tracionar a pele, centro cirúrgico equipado com equipe especializada e{" "}
         <b className="text-ink">acompanhamento incluso por 12 meses</b>.
         <br />
         <br />

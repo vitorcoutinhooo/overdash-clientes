@@ -9,7 +9,6 @@ export type Match = {
   why: string;
   down: string;
   last: string;
-  anest: string;
   alt: string;
 };
 
@@ -18,11 +17,10 @@ const MATCHES: Match[] = [
     key: "flacidez",
     chip: "Rosto caído, papada",
     title: "Lifting Facial Deep Plane",
-    why: "A flacidez de terço médio e inferior é estrutural: os ligamentos perderam sustentação. O Deep Plane reposiciona músculo e ligamento profundo — a pele acompanha, não é tracionada.",
+    why: "A flacidez de terço médio e inferior é estrutural: os ligamentos perderam sustentação. O Deep Plane reposiciona músculo e ligamento profundo, a pele acompanha, não é tracionada.",
     down: "Social em ~14 dias",
-    last: "8 a 10 anos",
-    anest: "Geral, com anestesista",
-    alt: "Se a sua flacidez for leve, a avaliação pode indicar um caminho menos invasivo — você vai ouvir isso.",
+    last: "de 10 a 15 anos",
+    alt: "Se a sua flacidez for leve, a avaliação pode indicar um caminho menos invasivo. Você vai ouvir isso.",
   },
   {
     key: "sulcos",
@@ -30,8 +28,7 @@ const MATCHES: Match[] = [
     title: "Deep Plane + Microfat",
     why: "Marcas fundas quase nunca são só pele: há queda de estrutura somada a perda de volume. Reposicionar resolve a queda; o Microfat devolve o volume com a sua própria gordura.",
     down: "Social em ~14 dias",
-    last: "8 a 10 anos (lifting)",
-    anest: "Geral, com anestesista",
+    last: "de 10 a 15 anos (lifting)",
     alt: "Em casos iniciais, apenas medicina regenerativa pode ser suficiente.",
   },
   {
@@ -41,8 +38,7 @@ const MATCHES: Match[] = [
     why: "Gordura processada em partículas ultrafinas, rica em fatores de crescimento e células-tronco: trata textura, rugas finas, cicatrizes e uniformiza o tom da pele.",
     down: "Menor tempo de recuperação",
     last: "Definida na avaliação",
-    anest: "Local ou sedação",
-    alt: "Não corrige flacidez estrutural — se houver queda de tecido, a indicação muda.",
+    alt: "Não corrige flacidez estrutural. Se houver queda de tecido, a indicação muda.",
   },
   {
     key: "corpo",
@@ -51,7 +47,6 @@ const MATCHES: Match[] = [
     why: "Combina técnicas para remodelar, rejuvenescer e reduzir gordura localizada de forma minimamente invasiva, com definição corporal avançada.",
     down: "Recuperação reduzida",
     last: "Definida na avaliação",
-    anest: "Local ou sedação",
     alt: "Indicado para quem tem rotina agitada e quer resultado rápido e seguro.",
   },
   {
@@ -60,18 +55,16 @@ const MATCHES: Match[] = [
     title: "Deep Plane (terço médio) + Nanofat",
     why: "Olhar cansado costuma vir do terço médio que desceu e da perda de qualidade da pele periorbital. O plano combina reposicionamento e regeneração.",
     down: "Social em ~14 dias",
-    last: "8 a 10 anos (lifting)",
-    anest: "Geral, com anestesista",
+    last: "de 10 a 15 anos (lifting)",
     alt: "A conduta exata depende do que a avaliação encontrar na sua anatomia.",
   },
   {
     key: "volume",
-    chip: 'Rosto "esvaziado"',
+    chip: "Derretimento facial",
     title: "Microfat (gordura própria)",
     why: "Pequenas quantidades de gordura purificada devolvem volume onde ele foi perdido. Sem preenchedor sintético, sem material estranho, sem risco de rejeição.",
     down: "Menor tempo de recuperação",
     last: "Definida na avaliação",
-    anest: "Local ou sedação",
     alt: "Se houver queda estrutural associada, o Deep Plane entra no plano.",
   },
 ];
@@ -87,8 +80,8 @@ export function PainMatch({ onMatch }: { onMatch?: (m: Match) => void }) {
           O que mais te incomoda quando você se olha no espelho?
         </h2>
         <p className="mt-4 max-w-[58ch] text-[0.95rem] leading-relaxed text-muted-foreground">
-          Escolha um. Em 30 segundos você vê a técnica indicada para o seu caso, o tempo de
-          recuperação e quanto tempo o resultado dura — antes de falar com alguém.
+          Escolha um. Em 30 segundos você vê a técnica indicada para o seu caso e o tempo de
+          recuperação, antes de falar com alguém.
         </p>
 
         <div className="mt-7 flex flex-wrap gap-2.5">
@@ -127,11 +120,10 @@ export function PainMatch({ onMatch }: { onMatch?: (m: Match) => void }) {
               {active.why}
             </p>
 
-            <div className="mt-6 grid gap-3 sm:grid-cols-3">
+            <div className="mt-6 grid gap-3 sm:grid-cols-2">
               {[
                 ["Recuperação", active.down],
                 ["Duração", active.last],
-                ["Anestesia", active.anest],
               ].map(([k, v]) => (
                 <div key={k} className="rounded-xl bg-muted p-4">
                   <span className="font-mono text-[0.6rem] tracking-[0.1em] uppercase text-muted-foreground">
@@ -155,7 +147,7 @@ export function PainMatch({ onMatch }: { onMatch?: (m: Match) => void }) {
               Falar com a Dra. sobre isso
             </Cta>
             <p className="mt-3 text-xs text-muted-foreground">
-              A indicação final depende da avaliação presencial — este é um direcionamento, não um
+              A indicação final depende da avaliação presencial. Este é um direcionamento, não um
               diagnóstico.
             </p>
           </div>

@@ -2,15 +2,15 @@ import { useState } from "react";
 import { CLINIC, IMG, wa } from "@/lib/site-data";
 import { Cta } from "@/components/site/cta";
 import { PainMatch, type Match } from "@/components/site/pain-match";
-import { RecoveryPlanner } from "@/components/site/recovery-planner";
 import { Testimonials } from "@/components/site/testimonials";
 import { Faq } from "@/components/site/faq";
 
 const TICKER = [
   `${CLINIC.crm} · ${CLINIC.doctor}`,
   "Avaliação presencial com a médica, não com consultora",
-  "Centro cirúrgico equipado + anestesista",
+  "Centro cirúrgico equipado",
   "Acompanhamento por 12 meses",
+  "Mulheres e homens",
   `${CLINIC.city}`,
 ];
 
@@ -23,9 +23,8 @@ const PROCEDURES = [
     lead: 'Reposiciona músculo e ligamento, não só a pele. É por isso que não fica com aspecto de "esticado".',
     specs: [
       ["Indicado", "Flacidez de terço médio e inferior, papada, contorno perdido"],
-      ["Duração", "8 a 10 anos"],
+      ["Duração", "de 10 a 15 anos"],
       ["Recuperação", "Social em ~14 dias · plena em 30"],
-      ["Anestesia", "Geral, com anestesista"],
     ],
   },
   {
@@ -38,7 +37,6 @@ const PROCEDURES = [
       ["Indicado", "Gordura localizada + definição, rotina agitada"],
       ["Duração", "Definida na avaliação"],
       ["Recuperação", "Reduzida, retorno rápido à rotina"],
-      ["Anestesia", "Local ou sedação"],
     ],
   },
   {
@@ -48,10 +46,9 @@ const PROCEDURES = [
     title: "Microfat & Nanofat",
     lead: "Usa a sua própria gordura. Sem preenchedor sintético, sem risco de rejeição.",
     specs: [
-      ["Indicado", "Rosto esvaziado, rugas finas, qualidade e textura da pele"],
+      ["Indicado", "Derretimento facial, rugas finas, qualidade e textura da pele"],
       ["Duração", "Definida na avaliação"],
       ["Recuperação", "Menor tempo de recuperação"],
-      ["Anestesia", "Local ou sedação"],
     ],
   },
 ];
@@ -60,7 +57,7 @@ const JOURNEY = [
   ["01", "Avaliação presencial", "Com a Dra. Rubiana. Análise de anatomia e expectativa."],
   ["02", "Plano por escrito", "Técnica, condições, riscos e data. Você sai com o documento."],
   ["03", "Pré-operatório", "Exames e liberação. Orientação enviada por escrito."],
-  ["04", "Dia do procedimento", "Centro cirúrgico com anestesista presente."],
+  ["04", "Dia do procedimento", "Centro cirúrgico equipado com equipe especializada."],
   ["05", "Acompanhamento", "Retornos em 7, 30, 90 dias e 12 meses, inclusos."],
 ];
 
@@ -161,6 +158,9 @@ export function RubianaRamosPage() {
               <span className="rounded-full bg-muted px-3 py-1.5 font-mono text-[0.6rem] tracking-[0.1em] uppercase text-muted-foreground">
                 {CLINIC.city}
               </span>
+              <span className="rounded-full bg-muted px-3 py-1.5 font-mono text-[0.6rem] tracking-[0.1em] uppercase text-muted-foreground">
+                Mulheres e homens
+              </span>
             </div>
 
             <div className="mt-7 max-w-md space-y-3">
@@ -181,7 +181,7 @@ export function RubianaRamosPage() {
 
             <div className="mt-8 grid gap-2.5 sm:grid-cols-2">
               <Chip title="Médica, não consultora" text="Avaliação feita pela Dra. Rubiana" />
-              <Chip title="Anestesista presente" text="Centro cirúrgico equipado" />
+              <Chip title="Centro cirúrgico equipado" text="Estrutura com suporte especializado" />
               <Chip title="Plano por escrito" text="Você sai com técnica e condições definidas" />
               <Chip title="Acompanhamento 12 meses" text="Retornos inclusos" />
             </div>
@@ -254,8 +254,8 @@ export function RubianaRamosPage() {
                       </div>
                     ))}
                   </dl>
-                  <Cta variant="ghost" className="mt-auto min-h-11 text-[0.68rem]" href="#agenda">
-                    Ver se dá tempo até meu evento
+                  <Cta variant="ghost" className="mt-auto min-h-11 text-[0.68rem]" href="#avaliacao">
+                    Agendar avaliação
                   </Cta>
                 </div>
               </article>
@@ -310,7 +310,7 @@ export function RubianaRamosPage() {
                     "Não corrige flacidez estrutural",
                     0,
                   ],
-                  ["Duração do resultado", "8 a 10 anos", "Menor permanência", "Meses", 0],
+                  ["Duração do resultado", "de 10 a 15 anos", "Menor permanência", "Meses", 0],
                   ["Recuperação social", "~14 dias", "Variável", "1 a 2 dias", 2],
                   [
                     "Quantas vezes você repete",
@@ -348,10 +348,7 @@ export function RubianaRamosPage() {
         </div>
       </section>
 
-      {/* 06 · PLANEJADOR */}
-      <RecoveryPlanner />
-
-      {/* 07 · ANTES E DEPOIS */}
+      {/* 06 · ANTES E DEPOIS */}
       <section id="resultados" className="border-b border-border bg-card">
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
           <p className="eyebrow">Resultados</p>
@@ -377,7 +374,7 @@ export function RubianaRamosPage() {
                 <div className="overflow-hidden rounded-2xl border border-border">
                   <img
                     src={IMG.results[i]}
-                    alt={`Caso real de ${tech} no Instituto Ramoniê — antes e depois`}
+                    alt={`Caso real de ${tech} no Instituto Ramoniê: antes e depois`}
                     className="aspect-square w-full object-cover"
                     loading="lazy"
                   />
@@ -397,10 +394,10 @@ export function RubianaRamosPage() {
         </div>
       </section>
 
-      {/* 08 · DEPOIMENTOS */}
+      {/* 07 · DEPOIMENTOS */}
       <Testimonials />
 
-      {/* 09 · JORNADA */}
+      {/* 08 · JORNADA */}
       <section className="border-b border-border surface-blush">
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
           <p className="eyebrow">Como funciona</p>
@@ -419,7 +416,7 @@ export function RubianaRamosPage() {
         </div>
       </section>
 
-      {/* 10 · DESEJO */}
+      {/* 09 · DESEJO */}
       <section className="bg-ink text-cream">
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
           <p className="font-mono text-[0.6rem] tracking-[0.16em] uppercase text-gold">
@@ -453,12 +450,12 @@ export function RubianaRamosPage() {
             porquê.
           </p>
           <p className="mt-6 max-w-[24ch] font-display text-[1.6rem] text-gold">
-            A mesma mulher. Apenas renovada.
+            A mesma pessoa. Apenas renovada.
           </p>
         </div>
       </section>
 
-      {/* 11 · A AVALIAÇÃO */}
+      {/* 10 · A AVALIAÇÃO */}
       <section id="avaliacao" className="border-b border-border bg-card">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:px-10 md:py-24 lg:grid-cols-2">
           <div>
@@ -517,18 +514,14 @@ export function RubianaRamosPage() {
         </div>
       </section>
 
-      {/* 12 · SEGURANÇA */}
+      {/* 11 · SEGURANÇA */}
       <section className="border-b border-border surface-blush">
         <div className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
           <p className="eyebrow">Segurança</p>
           <h2 className="mt-3 text-[2rem] md:text-[3.1rem]">Cada selo aqui tem lastro.</h2>
-          <div className="mt-9 grid gap-4 md:grid-cols-4">
+          <div className="mt-9 grid gap-4 md:grid-cols-3">
             {[
               [CLINIC.crm, "Registro ativo no Conselho Regional de Medicina do Paraná."],
-              [
-                "Anestesista em todo procedimento",
-                "Nenhuma cirurgia é feita sem médico anestesista presente.",
-              ],
               [
                 "Centro cirúrgico equipado",
                 "Estrutura com suporte de emergência e equipe assistencial.",
@@ -547,7 +540,7 @@ export function RubianaRamosPage() {
         </div>
       </section>
 
-      {/* 13 · A DRA */}
+      {/* 12 · A DRA */}
       <section id="a-dra" className="border-b border-border bg-card">
         <div className="mx-auto grid max-w-6xl gap-12 px-5 py-16 md:px-10 md:py-24 lg:grid-cols-[0.9fr_1.1fr] lg:items-center">
           <div className="relative overflow-hidden rounded-[2rem] border border-border surface-blush p-10 text-center shadow-card">
@@ -573,8 +566,9 @@ export function RubianaRamosPage() {
             </p>
             <p className="mt-5 text-[0.95rem] leading-relaxed text-muted-foreground">
               Médica dedicada ao rejuvenescimento facial, técnicas regenerativas e resultados
-              naturais. Trabalha apenas com técnicas avançadas que respeitam as características
-              únicas de cada paciente e entregam resultados harmoniosos, duradouros e sofisticados.
+              naturais. Atende mulheres e homens. Trabalha apenas com técnicas avançadas que
+              respeitam as características únicas de cada paciente e entregam resultados harmoniosos,
+              duradouros e sofisticados.
             </p>
             <div className="mt-6 grid gap-2.5">
               <Chip
@@ -594,10 +588,10 @@ export function RubianaRamosPage() {
         </div>
       </section>
 
-      {/* 14 · FAQ */}
+      {/* 13 · FAQ */}
       <Faq />
 
-      {/* 15 · LOCALIZAÇÃO */}
+      {/* 14 · LOCALIZAÇÃO */}
       <section className="border-b border-border surface-blush">
         <div className="mx-auto grid max-w-6xl gap-10 px-5 py-16 md:px-10 md:py-24 lg:grid-cols-2">
           <div>
@@ -638,7 +632,7 @@ export function RubianaRamosPage() {
         </div>
       </section>
 
-      {/* 16 · CTA FINAL */}
+      {/* 15 · CTA FINAL */}
       <section className="bg-card">
         <div className="mx-auto max-w-3xl px-5 py-16 text-center md:py-24">
           <h2 className="mx-auto max-w-[24ch] text-[2rem] md:text-[3.1rem]">

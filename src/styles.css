@@ -1,6 +1,15 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
+@font-face {
+  font-family: "Ramonie Regular";
+  src: url("/fonts/Ramonie-Regular.otf") format("opentype"),
+       url("/fonts/Ramonie-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /*
@@ -51,7 +60,7 @@
   --color-gold: var(--gold);
   --color-success: var(--success);
   --color-alert: var(--alert);
-  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-display: "Ramonie Regular", "Cormorant Garamond", Georgia, serif;
   --font-sans: "Jost", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, monospace;
   --shadow-soft: 0 18px 50px -20px oklch(0.35 0.06 30 / 0.28);
@@ -61,17 +70,18 @@
 :root {
   --radius: 0.75rem;
 
-  --ink: oklch(0.31 0.031 40);
-  --ink-soft: oklch(0.51 0.024 40);
-  --cream: oklch(0.985 0.008 60);
-  --blush: oklch(0.958 0.019 45);
-  --rose: oklch(0.68 0.086 35);
-  --rose-soft: oklch(0.93 0.031 40);
+  /* Brand palette — Instituto Ramoniê */
+  --ink: oklch(0.23 0.045 264);       /* azul #1C2233 */
+  --ink-soft: oklch(0.50 0.030 52);   /* marrom #7A6B5D */
+  --cream: oklch(0.985 0.008 60);     /* branco quente para cards e texto em fundo escuro */
+  --blush: oklch(0.944 0.017 58);     /* bege #F0E8E2 — background principal */
+  --rose: oklch(0.618 0.094 38);      /* rosa #C07860 — destaque e CTAs */
+  --rose-soft: oklch(0.935 0.028 42); /* rosa claro para fundo de chips/badges */
   --gold: oklch(0.72 0.098 80);
   --success: oklch(0.55 0.09 155);
   --alert: oklch(0.56 0.15 35);
 
-  --background: var(--cream);
+  --background: var(--blush);
   --foreground: var(--ink);
   --card: oklch(1 0 0);
   --card-foreground: var(--ink);
