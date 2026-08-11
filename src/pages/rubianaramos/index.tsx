@@ -2,6 +2,7 @@ import { useState } from "react";
 import { CLINIC, IMG, wa } from "@/lib/site-data";
 import { Cta } from "@/components/site/cta";
 import { PainMatch, type Match } from "@/components/site/pain-match";
+import { ResultsCarousel } from "@/components/site/results-carousel";
 import { Testimonials } from "@/components/site/testimonials";
 import { Faq } from "@/components/site/faq";
 
@@ -349,50 +350,7 @@ export function RubianaRamosPage() {
       </section>
 
       {/* 06 · ANTES E DEPOIS */}
-      <section id="resultados" className="border-b border-border bg-card">
-        <div className="mx-auto max-w-6xl px-5 py-16 md:px-10 md:py-24">
-          <p className="eyebrow">Resultados</p>
-          <h2 className="mt-3 max-w-[28ch] text-[2rem] md:text-[3.1rem]">
-            Antes e depois com o que ninguém coloca: contexto.
-          </h2>
-          <p className="mt-4 max-w-[58ch] text-[0.95rem] leading-relaxed text-muted-foreground">
-            Técnica, tempo de pós-operatório e o que <b className="text-ink">não</b> foi feito. Foto
-            sem legenda não é prova, é enfeite.
-          </p>
-
-          <div className="mt-9 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {[
-              { tech: "Deep Plane", note: "Foto de 6 meses. Sem preenchimento, sem toxina no dia." },
-              {
-                tech: "Deep Plane + Nanofat",
-                note: "Foco em terço inferior e papada. Foto de 4 meses.",
-              },
-              { tech: "Deep Plane", note: "Contorno de mandíbula e pescoço. Foto de 90 dias." },
-              { tech: "Nanofat", note: "Textura e qualidade da pele. Sem laser associado." },
-            ].map(({ tech, note }, i) => (
-              <figure key={tech + i}>
-                <div className="overflow-hidden rounded-2xl border border-border">
-                  <img
-                    src={IMG.results[i]}
-                    alt={`Caso real de ${tech} no Instituto Ramoniê: antes e depois`}
-                    className="aspect-square w-full object-cover"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption className="mt-3 text-xs leading-relaxed text-muted-foreground">
-                  <b className="block text-ink">Caso real · {tech}</b>
-                  {note}
-                </figcaption>
-              </figure>
-            ))}
-          </div>
-          <p className="mt-6 max-w-[80ch] text-xs leading-relaxed text-muted-foreground">
-            Imagens publicadas com autorização por escrito das pacientes. Resultados variam conforme
-            anatomia, idade e cicatrização. A avaliação define o que é possível no seu caso.
-            Conteúdo de caráter educativo.
-          </p>
-        </div>
-      </section>
+      <ResultsCarousel />
 
       {/* 07 · DEPOIMENTOS */}
       <Testimonials />
