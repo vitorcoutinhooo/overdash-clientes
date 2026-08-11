@@ -1,5 +1,6 @@
 {
   "rewrites": [
+    { "source": "/calculadoramarketplaces", "destination": "/calculadoramarketplaces/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
   ]
 }

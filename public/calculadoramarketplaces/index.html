@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Calculadora de Margem em Marketplaces — Over Performance</title>
+<style>
+:root{
+  color-scheme: light;
+  --plane:#f9f9f7; --surface:#fcfcfb;
+  --ink:#0b0b0b; --ink-2:#52514e; --muted:#898781;
+  --grid:#e1e0d9; --axis:#c3c2b7; --ring:rgba(11,11,11,0.10);
+  --seq-100:#cde2fb; --seq-250:#86b6ef; --seq-450:#2a78d6; --seq-600:#184f95;
+  --good:#0ca30c; --warning:#fab219; --serious:#ec835a; --critical:#d03b3b;
+  --good-ink:#006300;
+  --brand:#0b0b0b;
+  --radius:14px;
+}
+:root[data-theme="dark"]{
+  color-scheme: dark;
+  --plane:#0d0d0d; --surface:#1a1a19;
+  --ink:#ffffff; --ink-2:#c3c2b7; --muted:#898781;
+  --grid:#2c2c2a; --axis:#383835; --ring:rgba(255,255,255,0.10);
+  --seq-100:#104281; --seq-250:#184f95; --seq-450:#3987e5; --seq-600:#86b6ef;
+  --good-ink:#0ca30c;
+  --brand:#ffffff;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--plane); color:var(--ink);
+  font-family:system-ui,-apple-system,"Segoe UI",sans-serif;
+  font-size:15px; line-height:1.5; -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:1120px;margin:0 auto;padding:28px 20px 72px}
+header.top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;margin-bottom:26px;flex-wrap:wrap}
+.brand{font-weight:700;letter-spacing:-.01em;font-size:14px;text-transform:uppercase}
+.brand span{color:var(--muted);font-weight:500;text-transform:none}
+h1{font-size:29px;line-height:1.15;letter-spacing:-.02em;margin:10px 0 6px;max-width:22ch}
+.sub{color:var(--ink-2);max-width:62ch;margin:0}
+.themebtn{background:none;border:1px solid var(--ring);color:var(--ink-2);border-radius:999px;padding:6px 13px;font:inherit;font-size:13px;cursor:pointer}
+.themebtn:hover{background:var(--surface)}
+
+.grid{display:grid;grid-template-columns:340px 1fr;gap:22px;align-items:start}
+.grid>*{min-width:0}
+@media(max-width:880px){.grid{grid-template-columns:1fr}}
+
+.card{background:var(--surface);border:1px solid var(--ring);border-radius:var(--radius);padding:20px}
+.card h2{font-size:12px;text-transform:uppercase;letter-spacing:.07em;color:var(--muted);margin:0 0 14px;font-weight:600}
+
+.seg{display:grid;grid-template-columns:1fr 1fr;gap:4px;background:var(--plane);border:1px solid var(--ring);border-radius:10px;padding:4px;margin-bottom:18px}
+.seg button{background:none;border:0;border-radius:7px;padding:9px 6px;font:inherit;font-size:13.5px;font-weight:600;color:var(--ink-2);cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--surface);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,.08)}
+
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:600;margin-bottom:5px}
+.field .hint{display:block;font-size:12px;color:var(--muted);font-weight:400;margin-top:3px;line-height:1.35}
+.inp{position:relative;display:flex;align-items:center}
+.inp .pre,.inp .suf{position:absolute;color:var(--muted);font-size:13.5px;pointer-events:none}
+.inp .pre{left:11px} .inp .suf{right:11px}
+input[type=number]{
+  width:100%;padding:10px 11px;border:1px solid var(--axis);background:var(--plane);
+  color:var(--ink);border-radius:9px;font:inherit;font-variant-numeric:tabular-nums;
+}
+.inp.has-pre input{padding-left:32px}
+.inp.has-suf input{padding-right:30px}
+input[type=number]:focus{outline:2px solid var(--seq-450);outline-offset:1px;border-color:transparent}
+input::-webkit-outer-spin-button,input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
+input[type=number]{-moz-appearance:textfield}
+
+.res-head{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:4px}
+.res-head h2{margin:0}
+.legend-note{font-size:12px;color:var(--muted)}
+
+table.res{width:100%;border-collapse:collapse;margin-top:8px;table-layout:fixed}
+table.res th{
+  text-align:right;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;
+  color:var(--muted);font-weight:600;padding:0 0 8px 10px;border-bottom:1px solid var(--grid);
+  vertical-align:bottom;
+}
+table.res th:first-child{text-align:left;padding-left:0}
+table.res td{padding:14px 0 14px 10px;border-bottom:1px solid var(--grid);text-align:right;font-variant-numeric:tabular-nums;vertical-align:top}
+table.res td:first-child{text-align:left;padding-left:0}
+table.res tbody tr:last-child td{border-bottom:0}
+col.c-canal{width:auto} col.c-preco{width:118px} col.c-lucro{width:126px} col.c-margem{width:112px} col.c-bar{width:132px}
+.hide-preco col.c-preco,.hide-preco th.t-preco,.hide-preco td.t-preco{display:none}
+.hide-bar col.c-bar,.hide-bar th.bar-cell,.hide-bar td.bar-cell{display:none}
+.canal{font-weight:600;display:block;font-size:15px}
+.canal-sub{font-size:12px;color:var(--muted);font-weight:400;display:block;margin-top:1px}
+.big{font-size:19px;font-weight:650;letter-spacing:-.01em;display:block;line-height:1.25}
+.bar-cell{padding-left:20px!important}
+.bar-track{height:9px;background:var(--grid);border-radius:4px;position:relative;overflow:hidden;margin-top:6px}
+.bar-fill{position:absolute;top:0;bottom:0;border-radius:4px;background:var(--seq-450)}
+.bar-fill.neg{background:var(--critical)}
+.bar-zero{position:absolute;top:-3px;bottom:-3px;width:1px;background:var(--axis)}
+.status{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;font-weight:600;margin-top:5px;text-align:left}
+.dot{width:9px;height:9px;border-radius:50%;flex:none}
+.s-good .dot{background:var(--good)} .s-good{color:var(--good-ink)}
+.s-warn .dot{background:var(--warning)} .s-warn{color:var(--ink-2)}
+.s-bad .dot{background:var(--critical)} .s-bad{color:var(--critical)}
+.best{font-size:11px;font-weight:700;letter-spacing:.05em;text-transform:uppercase;color:var(--good-ink);display:block;margin-top:3px}
+
+details.det{margin-top:10px}
+details.det summary{cursor:pointer;font-size:12.5px;color:var(--ink-2);list-style:none;display:inline-flex;gap:5px;align-items:center}
+details.det summary::-webkit-details-marker{display:none}
+details.det summary::before{content:"▸";color:var(--muted)}
+details.det[open] summary::before{content:"▾"}
+.break{margin-top:9px;font-size:13px;border-collapse:collapse;width:100%;max-width:420px}
+.break td{padding:4px 0;border:0;font-variant-numeric:tabular-nums}
+.break td:last-child{text-align:right}
+.break tr.tot td{border-top:1px solid var(--grid);font-weight:650;padding-top:7px}
+
+.cta{
+  margin-top:22px;background:var(--surface);border:1px solid var(--ring);border-radius:var(--radius);
+  padding:22px;display:flex;gap:18px;align-items:center;justify-content:space-between;flex-wrap:wrap
+}
+.cta p{margin:0;max-width:52ch;color:var(--ink-2)}
+.cta strong{color:var(--ink);display:block;font-size:17px;margin-bottom:4px}
+.btn{
+  background:var(--brand);color:var(--surface);border:0;border-radius:10px;padding:13px 22px;
+  font:inherit;font-weight:650;cursor:pointer;text-decoration:none;display:inline-block;white-space:nowrap
+}
+.btn:hover{opacity:.88}
+
+.fees{margin-top:22px}
+.fees table{width:100%;border-collapse:collapse;font-size:13.5px}
+.fees th{text-align:right;font-size:11.5px;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);font-weight:600;padding:0 0 8px}
+.fees th:first-child{text-align:left}
+.fees td{padding:6px 0 6px 8px;border-top:1px solid var(--grid);text-align:right}
+.fees td:first-child{text-align:left;padding-left:0}
+.fees input{width:82px;padding:6px 8px;text-align:right;font-size:13px}
+.fees .auto input{color:var(--muted)}
+.reset{background:none;border:1px solid var(--ring);border-radius:8px;padding:6px 12px;font:inherit;font-size:12.5px;color:var(--ink-2);cursor:pointer;margin-top:12px}
+.src{font-size:12px;color:var(--muted);margin-top:14px;line-height:1.5}
+.src a{color:var(--ink-2)}
+.warn{
+  margin-top:22px;font-size:13px;color:var(--ink-2);background:var(--surface);
+  border:1px solid var(--ring);border-left:3px solid var(--warning);border-radius:10px;padding:14px 16px
+}
+.warn b{color:var(--ink)}
+footer{margin-top:34px;font-size:12.5px;color:var(--muted);text-align:center}
+
+@media(max-width:640px){
+  h1{font-size:25px}
+  col.c-bar,table.res th.bar-cell,table.res td.bar-cell{display:none}
+  col.c-preco{width:92px} col.c-lucro{width:92px} col.c-margem{width:84px}
+  table.res td{padding-left:6px} table.res th{padding-left:6px}
+  .big{font-size:16px}
+  .canal{font-size:14px} .canal-sub{font-size:11px}
+  .status{font-size:11.5px}
+  .scrollx{overflow-x:auto;-webkit-overflow-scrolling:touch}
+  .fees table{min-width:520px}
+  .cta{padding:18px} .btn{width:100%;text-align:center}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="top">
+  <div>
+    <div class="brand">Over Performance <span>· assessoria de marketplace</span></div>
+    <h1>Quanto sobra da sua venda, canal por canal</h1>
+    <p class="sub">Coloque o custo do produto e descubra a margem real na Shopee, no Mercado Livre, na Amazon e no TikTok Shop — já com comissão, taxa fixa, imposto e frete descontados. Sem cadastro.</p>
+  </div>
+  <button class="themebtn" id="theme" type="button">Modo escuro</button>
+</header>
+
+<div class="grid">
+
+  <!-- ENTRADAS -->
+  <div class="card">
+    <h2>Seu produto</h2>
+
+    <div class="seg" role="group" aria-label="Modo de cálculo">
+      <button type="button" id="m-preco" aria-pressed="true">Tenho um preço</button>
+      <button type="button" id="m-margem" aria-pressed="false">Quero uma margem</button>
+    </div>
+
+    <div class="field">
+      <label for="custo">Custo do produto</label>
+      <div class="inp has-pre"><span class="pre">R$</span><input type="number" id="custo" value="14.47" step="0.01" min="0"></div>
+      <span class="hint">Quanto você paga pelo produto, sem impostos de venda.</span>
+    </div>
+
+    <div class="field" id="w-preco">
+      <label for="preco">Preço de venda</label>
+      <div class="inp has-pre"><span class="pre">R$</span><input type="number" id="preco" value="32.60" step="0.01" min="0"></div>
+      <span class="hint">O preço que o cliente vê na vitrine.</span>
+    </div>
+
+    <div class="field" id="w-margem" hidden>
+      <label for="margem">Margem líquida desejada</label>
+      <div class="inp has-suf"><input type="number" id="margem" value="20" step="0.5"><span class="suf">%</span></div>
+      <span class="hint">Sobre o preço de venda. A calculadora devolve o preço necessário em cada canal.</span>
+    </div>
+
+    <div class="field">
+      <label for="imposto">Imposto sobre a venda</label>
+      <div class="inp has-suf"><input type="number" id="imposto" value="10" step="0.1" min="0"><span class="suf">%</span></div>
+      <span class="hint">Simples Nacional, Presumido ou Real — use a alíquota efetiva do seu regime.</span>
+    </div>
+
+    <div class="field">
+      <label for="outros">Embalagem e outros custos</label>
+      <div class="inp has-pre"><span class="pre">R$</span><input type="number" id="outros" value="1.00" step="0.01" min="0"></div>
+      <span class="hint">Caixa, etiqueta, fita, insumo por pedido.</span>
+    </div>
+
+    <div class="field">
+      <label for="frete">Frete que sai do seu bolso</label>
+      <div class="inp has-pre"><span class="pre">R$</span><input type="number" id="frete" value="0.00" step="0.01" min="0"></div>
+      <span class="hint">Só o que você paga. Cada canal aplica esse valor conforme a regra dele — dá para ajustar em “taxas usadas”.</span>
+    </div>
+  </div>
+
+  <!-- RESULTADO -->
+  <div>
+    <div class="card">
+      <div class="res-head">
+        <h2 id="res-title">Margem por canal</h2>
+        <span class="legend-note" id="res-note"></span>
+      </div>
+      <table class="res" id="tabela">
+        <colgroup>
+          <col class="c-canal"><col class="c-preco"><col class="c-lucro"><col class="c-margem"><col class="c-bar">
+        </colgroup>
+        <thead>
+          <tr>
+            <th scope="col">Canal</th>
+            <th scope="col" id="h-2" class="t-preco">Preço necessário</th>
+            <th scope="col">Lucro por venda</th>
+            <th scope="col">Margem</th>
+            <th scope="col" class="bar-cell">&nbsp;</th>
+          </tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+    </div>
+
+    <div class="cta">
+      <p>
+        <strong>Sua conta fecha, mas e a operação?</strong>
+        Margem boa na planilha não vira lucro sozinha: anúncio mal cadastrado, canal errado e verba mal alocada comem o resto. A Over faz o diagnóstico dos seus canais e devolve um plano.
+      </p>
+      <a class="btn" id="wa" href="#" target="_blank" rel="noopener">Falar com a Over no WhatsApp</a>
+    </div>
+
+    <div class="card fees">
+      <h2>Taxas usadas — clique para ajustar</h2>
+      <div class="scrollx">
+      <table>
+        <thead>
+          <tr>
+            <th scope="col">Canal</th>
+            <th scope="col">Comissão %</th>
+            <th scope="col">Taxa fixa R$</th>
+            <th scope="col">Outras taxas %</th>
+            <th scope="col">Frete R$</th>
+          </tr>
+        </thead>
+        <tbody id="feebody"></tbody>
+      </table>
+      </div>
+      <button class="reset" type="button" id="reset">Voltar para as taxas padrão</button>
+      <p class="src" id="src"></p>
+    </div>
+
+    <div class="warn">
+      <b>Confira antes de decidir.</b> Comissão de marketplace muda por categoria de produto, por reputação e por campanha — e mudou três vezes em 2026. Os valores acima são a tabela geral vigente; a sua categoria pode ter percentual diferente. Confirme no simulador oficial do canal antes de fechar preço.
+    </div>
+  </div>
+</div>
+
+<footer>Over Performance · calculadora aberta, sem cadastro. Base de taxas de agosto/2026.</footer>
+</div>
+
+<script>
+"use strict";
+
+/* ─────────────────────────────────────────────────────────────
+   ATENÇÃO ANTES DE PUBLICAR: troque pelo número do WhatsApp
+   de serviço da Over, no formato 55 + DDD + número.
+   ───────────────────────────────────────────────────────────── */
+const WHATSAPP = "5544000000000";
+
+const CANAIS = [
+  {
+    id:"shopee", nome:"Shopee", nota:"Vendedor CNPJ · tabela de 01/03/2026",
+    faixas:[
+      {ate:79.99,   com:20, fixo:4,  extra:0},
+      {ate:99.99,   com:14, fixo:16, extra:0},
+      {ate:199.99,  com:14, fixo:20, extra:0},
+      {ate:499.99,  com:14, fixo:26, extra:0},
+      {ate:Infinity,com:14, fixo:28, extra:0}
+    ],
+    fretePct:0   // programa de frete grátis: o custo já está embutido na comissão
+  },
+  {
+    id:"ml-classico", nome:"Mercado Livre", nota:"Anúncio Clássico",
+    faixas:[
+      {ate:78.99,   com:12, fixo:6, extra:0, frete:0},
+      {ate:Infinity,com:12, fixo:0, extra:0, frete:1}
+    ],
+    fretePct:1
+  },
+  {
+    id:"ml-premium", nome:"Mercado Livre", nota:"Anúncio Premium (parcelado sem juros)",
+    faixas:[
+      {ate:78.99,   com:17, fixo:6, extra:0, frete:0},
+      {ate:Infinity,com:17, fixo:0, extra:0, frete:1}
+    ],
+    fretePct:1
+  },
+  {
+    id:"amazon", nome:"Amazon", nota:"Plano profissional · comissão média de categoria",
+    faixas:[{ate:Infinity, com:14, fixo:0, extra:0, frete:1}],
+    fretePct:1
+  },
+  {
+    id:"tiktok", nome:"TikTok Shop", nota:"Tabela de 15/07/2026 · com programa de frete",
+    faixas:[
+      {ate:49.99,   com:10, fixo:4, extra:6},
+      {ate:Infinity,com:6,  fixo:6, extra:6}
+    ],
+    fretePct:0
+  }
+];
+
+const over = {}; // overrides manuais: over["shopee.com"] = 12
+
+const $ = id => document.getElementById(id);
+const num = id => { const v = parseFloat($(id).value); return isNaN(v) ? 0 : v; };
+const brl = v => v.toLocaleString("pt-BR",{style:"currency",currency:"BRL"});
+const pct = v => v.toLocaleString("pt-BR",{minimumFractionDigits:1,maximumFractionDigits:1}) + "%";
+
+let modo = "preco";
+
+/* taxas de uma faixa específica, já com override do usuário */
+function txFaixa(canal, f){
+  const usaFrete = f.frete !== undefined ? f.frete : canal.fretePct;
+  const g = (campo, padrao) => {
+    const k = canal.id + "." + campo;
+    return over[k] !== undefined ? over[k] : padrao;
+  };
+  return {
+    com:   g("com",   f.com),
+    fixo:  g("fixo",  f.fixo),
+    extra: g("extra", f.extra),
+    frete: g("frete", usaFrete ? num("frete") : 0),
+    auto:  { com: over[canal.id+".com"]===undefined, fixo: over[canal.id+".fixo"]===undefined,
+             extra: over[canal.id+".extra"]===undefined, frete: over[canal.id+".frete"]===undefined }
+  };
+}
+const faixaDe = (canal, preco) =>
+  canal.faixas.find(x => preco <= x.ate) || canal.faixas[canal.faixas.length-1];
+
+/* taxa vigente para um canal a um dado preço */
+const taxas = (canal, preco) => txFaixa(canal, faixaDe(canal, preco));
+
+/* dado um preço, calcula a conta completa */
+function conta(canal, preco){
+  const t = taxas(canal, preco);
+  const custo   = num("custo");
+  const imposto = num("imposto")/100 * preco;
+  const comissao= t.com/100 * preco;
+  const extra   = t.extra/100 * preco;
+  const outros  = num("outros");
+  const total   = imposto + comissao + extra + t.fixo + t.frete + outros;
+  const repasse = preco - (comissao + extra + t.fixo + t.frete);
+  const lucro   = preco - total - custo;
+  return {t, preco, custo, imposto, comissao, extra, outros, fixo:t.fixo, frete:t.frete, repasse, lucro,
+          margem: preco > 0 ? lucro/preco*100 : 0};
+}
+
+/* Preço necessário para atingir a margem alvo.
+   A taxa muda de faixa conforme o preço, então iterar não resolve: nas viradas de
+   faixa o valor oscila entre duas faixas e nunca converge. Aqui a equação é
+   resolvida faixa a faixa e só valem as soluções que caem dentro da própria faixa;
+   as bordas entram como candidatas. Devolve o menor preço que fecha a margem. */
+function precoAlvo(canal, alvo){
+  const custo = num("custo"), outros = num("outros"), imp = num("imposto")/100;
+  const cands = [];
+  let min = 0.01;
+  for (const f of canal.faixas){
+    const t = txFaixa(canal, f);
+    const denom = 1 - imp - t.com/100 - t.extra/100 - alvo/100;
+    if (denom > 0.0001){
+      const p = (custo + outros + t.fixo + t.frete) / denom;
+      if (p >= min - 1e-9 && p <= f.ate + 1e-9) cands.push(Math.max(p, min));
+    }
+    // a borda inferior da faixa pode já entregar a margem (salto de taxa fixa)
+    if (min > 0.01 && conta(canal, min).margem >= alvo - 1e-6) cands.push(min);
+    min = f.ate + 0.01;
+  }
+  return cands.length ? Math.min(...cands) : null;
+}
+
+function statusDe(m){
+  if (m < 0)  return ["s-bad","Prejuízo"];
+  if (m < 10) return ["s-warn","Apertada"];
+  return ["s-good","Saudável"];
+}
+
+function render(){
+  const alvo = num("margem");
+  const linhas = CANAIS.map(c => {
+    if (modo === "preco") {
+      const r = conta(c, num("preco"));
+      return {c, r, preco:r.preco, ok:true};
+    } else {
+      const p = precoAlvo(c, alvo);
+      if (p === null) return {c, r:null, preco:null, ok:false};
+      return {c, r:conta(c, p), preco:p, ok:true};
+    }
+  });
+
+  const ordenar = modo === "preco"
+    ? (a,b) => (b.r ? b.r.margem : -1e9) - (a.r ? a.r.margem : -1e9)
+    : (a,b) => (a.preco ?? 1e9) - (b.preco ?? 1e9);
+  linhas.sort(ordenar);
+
+  $("tabela").classList.toggle("hide-preco", modo === "preco");
+  // no modo margem toda linha fecha na mesma margem — a barra não diria nada
+  $("tabela").classList.toggle("hide-bar", modo === "margem");
+  $("res-title").textContent = modo === "preco" ? "Margem por canal" : "Preço para fechar " + pct(alvo);
+  $("res-note").textContent  = modo === "preco"
+    ? "Ordenado da maior para a menor margem."
+    : "Ordenado do menor preço para o maior — o primeiro é o canal mais competitivo.";
+
+  const vals   = linhas.filter(l=>l.r).map(l => l.r.margem);
+  const temNeg = vals.some(v => v < 0);
+  const maxAbs = Math.max(10, ...vals.map(Math.abs));
+  const zero   = temNeg ? 50 : 0;   // eixo no meio só quando existe prejuízo
+
+  $("tbody").innerHTML = linhas.map((l, i) => {
+    if (!l.ok) return `<tr><td><span class="canal">${l.c.nome}</span><span class="canal-sub">${l.c.nota}</span></td>
+      <td colspan="4" style="text-align:left;color:var(--critical);font-size:13.5px">
+      Margem de ${pct(alvo)} é impossível neste canal: comissão + imposto já consomem tudo.</td></tr>`;
+
+    const r = l.r, [cls, rotulo] = statusDe(r.margem);
+    const esc = temNeg ? 50 : 100;
+    const w = Math.min(esc, Math.abs(r.margem)/maxAbs*esc);
+    const bar = r.margem >= 0
+      ? `<div class="bar-fill" style="left:${zero}%;width:${w}%"></div>`
+      : `<div class="bar-fill neg" style="right:${100-zero}%;width:${w}%"></div>`;
+    const eixo = temNeg ? `<div class="bar-zero" style="left:50%"></div>` : "";
+    const melhor = (i === 0 && r.margem > 0)
+      ? `<span class="best">${modo==="preco" ? "melhor margem" : "menor preço"}</span>` : "";
+
+    return `<tr>
+      <td>
+        <span class="canal">${l.c.nome}</span>
+        <span class="canal-sub">${l.c.nota}</span>
+        ${melhor}
+        <details class="det"><summary>ver a conta</summary>
+          <table class="break">
+            <tr><td>Preço de venda</td><td>${brl(r.preco)}</td></tr>
+            <tr><td>− Comissão (${pct(r.t.com)})</td><td>−${brl(r.comissao)}</td></tr>
+            ${r.extra ? `<tr><td>− Outras taxas do canal (${pct(r.t.extra)})</td><td>−${brl(r.extra)}</td></tr>` : ""}
+            ${r.fixo  ? `<tr><td>− Taxa fixa por item</td><td>−${brl(r.fixo)}</td></tr>` : ""}
+            ${r.frete ? `<tr><td>− Frete pago por você</td><td>−${brl(r.frete)}</td></tr>` : ""}
+            <tr class="tot"><td>= Repasse do marketplace</td><td>${brl(r.repasse)}</td></tr>
+            <tr><td>− Imposto (${pct(num("imposto"))})</td><td>−${brl(r.imposto)}</td></tr>
+            <tr><td>− Custo do produto</td><td>−${brl(r.custo)}</td></tr>
+            ${r.outros ? `<tr><td>− Embalagem e outros</td><td>−${brl(r.outros)}</td></tr>` : ""}
+            <tr class="tot"><td>= Lucro líquido</td><td>${brl(r.lucro)}</td></tr>
+          </table>
+        </details>
+      </td>
+      <td class="t-preco"><span class="big">${brl(r.preco)}</span></td>
+      <td><span class="big">${brl(r.lucro)}</span></td>
+      <td>
+        <span class="big">${pct(r.margem)}</span>
+        <span class="status ${cls}"><span class="dot"></span>${rotulo}</span>
+      </td>
+      <td class="bar-cell"><div class="bar-track">${bar}${eixo}</div></td>
+    </tr>`;
+  }).join("");
+
+  renderFees(linhas);
+  renderWhats(linhas);
+}
+
+function renderFees(linhas){
+  $("feebody").innerHTML = linhas.filter(l=>l.r).map(l => {
+    const t = l.r.t, id = l.c.id;
+    const cel = (campo, val, step) =>
+      `<td class="${t.auto[campo] ? "auto" : ""}">
+         <input type="number" step="${step}" value="${val}" data-k="${id}.${campo}">
+       </td>`;
+    return `<tr>
+      <td>${l.c.nome} <span class="canal-sub">${l.c.nota}</span></td>
+      ${cel("com",  t.com,  "0.1")}
+      ${cel("fixo", t.fixo, "0.01")}
+      ${cel("extra",t.extra,"0.1")}
+      ${cel("frete",t.frete,"0.01")}
+    </tr>`;
+  }).join("");
+
+  $("feebody").querySelectorAll("input").forEach(el => {
+    el.addEventListener("input", () => {
+      const v = parseFloat(el.value);
+      over[el.dataset.k] = isNaN(v) ? 0 : v;
+      render();
+    });
+  });
+}
+
+function renderWhats(linhas){
+  const bons = linhas.filter(l => l.r);
+  const top = bons[0];
+  let msg = "Oi! Usei a calculadora de margem de vocês e queria entender melhor.\n\n";
+  msg += `Custo do produto: ${brl(num("custo"))}\n`;
+  msg += modo === "preco"
+    ? `Preço de venda: ${brl(num("preco"))}\n\nO que deu:\n`
+    : `Margem que eu quero: ${pct(num("margem"))}\n\nPreço que eu precisaria cobrar:\n`;
+  bons.forEach(l => {
+    msg += modo === "preco"
+      ? `• ${l.c.nome} (${l.c.nota}): ${pct(l.r.margem)} de margem, ${brl(l.r.lucro)} por venda\n`
+      : `• ${l.c.nome} (${l.c.nota}): ${brl(l.r.preco)}\n`;
+  });
+  if (top) msg += `\nMelhor canal pela conta: ${top.c.nome}.`;
+  msg += "\n\nQuero ver isso com vocês.";
+  $("wa").href = "https://wa.me/" + WHATSAPP + "?text=" + encodeURIComponent(msg);
+}
+
+$("src").innerHTML =
+  "Base das taxas: Shopee — tabela de comissão para CNPJ vigente desde 01/03/2026 (20% + R$4 até R$79,99; 14% + R$16 a R$28 nas faixas acima, sem teto). " +
+  "TikTok Shop — tabela de 15/07/2026 (10% + R$4 abaixo de R$50; 6% + R$6 a partir de R$50) mais 6% do programa de frete. " +
+  "Mercado Livre — comissão de 10% a 14% no Clássico e 15% a 19% no Premium conforme a categoria; aqui usamos 12% e 17% como média, com custo fixo por unidade nos produtos de menor valor. " +
+  "Amazon — comissão de 10% a 15% por categoria, aqui 14%; plano profissional de R$19/mês não entra no cálculo por venda. " +
+  "Levantado em 11/08/2026.";
+
+/* ── eventos ── */
+["custo","preco","margem","imposto","outros","frete"].forEach(id => $(id).addEventListener("input", render));
+
+$("m-preco").addEventListener("click", () => {
+  modo = "preco";
+  $("m-preco").setAttribute("aria-pressed","true");
+  $("m-margem").setAttribute("aria-pressed","false");
+  $("w-preco").hidden = false; $("w-margem").hidden = true;
+  render();
+});
+$("m-margem").addEventListener("click", () => {
+  modo = "margem";
+  $("m-margem").setAttribute("aria-pressed","true");
+  $("m-preco").setAttribute("aria-pressed","false");
+  $("w-margem").hidden = false; $("w-preco").hidden = true;
+  render();
+});
+
+$("reset").addEventListener("click", () => { for (const k in over) delete over[k]; render(); });
+
+$("theme").addEventListener("click", () => {
+  const dark = document.documentElement.dataset.theme === "dark";
+  document.documentElement.dataset.theme = dark ? "light" : "dark";
+  $("theme").textContent = dark ? "Modo escuro" : "Modo claro";
+});
+
+render();
+</script>
+</body>
+</html>
