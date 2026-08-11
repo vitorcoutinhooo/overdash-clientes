@@ -702,6 +702,17 @@ export function RubianaRamosPage() {
             {CLINIC.rating} ★ · {CLINIC.reviews} avaliações no Google
           </div>
         </div>
+        <div className="border-t border-cream/10 px-5 py-4 text-center font-mono text-[0.62rem] tracking-[0.06em] text-cream/40 md:px-10">
+          2026 {CLINIC.doctor}. Feito com ♡ por{" "}
+          <a
+            href="https://overperformance.com.br"
+            target="_blank"
+            rel="noopener"
+            className="text-cream/55 underline underline-offset-2 transition-colors hover:text-cream/80"
+          >
+            Over Performance
+          </a>
+        </div>
       </footer>
 
       {/* STICKY BAR */}
