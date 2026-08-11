@@ -1,0 +1,132 @@
+import { useState } from "react";
+import { CLINIC } from "@/lib/site-data";
+
+const QA: { q: string; a: React.ReactNode }[] = [
+  {
+    q: "Tenho medo de ficar com o rosto diferente. Isso pode acontecer?",
+    a: (
+      <>
+        Esse é o receio mais comum — e é justamente o que separa o Deep Plane do lifting
+        convencional. Muita gente acredita que o lifting serve para "esticar a pele". Mas o
+        envelhecimento acontece em camadas muito mais profundas: com o tempo, os tecidos perdem
+        sustentação e algumas estruturas descem gradualmente. Como o reposicionamento acontece na
+        camada muscular e ligamentar profunda, a pele não é tracionada — ela acompanha a estrutura
+        que voltou ao lugar.
+        <br />
+        <br />
+        O objetivo nunca foi mudar quem você é.{" "}
+        <b className="text-ink">
+          Naturalidade não é ausência de resultado: é um resultado que respeita quem você é.
+        </b>
+        <br />
+        <br />
+        <b className="text-ink">E antes disso:</b> na avaliação a Dra. mostra o que é possível{" "}
+        <i>e o que não é</i> no seu caso. Se o resultado que você quer não for atingível com
+        naturalidade, você vai ouvir isso.
+      </>
+    ),
+  },
+  {
+    q: "Vou sentir dor?",
+    a: (
+      <>
+        O procedimento é feito sob anestesia com médico anestesista presente — durante, você não
+        sente nada. No pós, a maioria das pacientes relata desconforto e sensação de pressão, não
+        dor aguda, controlados com a medicação prescrita nos primeiros dias. Os retornos são
+        acompanhados de perto pela equipe.
+      </>
+    ),
+  },
+  {
+    q: "Quantos dias fico sem aparecer?",
+    a: (
+      <>
+        Depende da técnica. Para o Deep Plane, a recuperação social costuma ser de ~14 dias e a
+        plena em 30.{" "}
+        <a href="#agenda" className="font-medium text-rose underline">
+          Use o planejador acima ↑
+        </a>{" "}
+        — coloque a data do seu compromisso e ele calcula a última data possível para operar.
+      </>
+    ),
+  },
+  {
+    q: "Quando vejo o resultado e quanto tempo dura?",
+    a: (
+      <>
+        O resultado aparece de forma progressiva. Aos 30 dias já se observa mais harmonia facial;
+        aos 40, definição de mandíbula e melhora do pescoço. O edema reduz gradativamente, os
+        tecidos se acomodam e o resultado segue evoluindo nos meses seguintes. No Deep Plane, a
+        permanência esperada é de 8 a 10 anos.
+      </>
+    ),
+  },
+  {
+    q: "Por que o site não informa o valor?",
+    a: (
+      <>
+        Porque não existe um valor único. O Deep Plane não é item de tabela: a conduta muda conforme
+        a anatomia, o grau de flacidez e o que precisa ser feito em cada caso — definir isso sem ver
+        o seu rosto seria irresponsável.
+        <br />
+        <br />
+        Na avaliação você recebe o plano por escrito, com a técnica indicada e as condições. Sem
+        compromisso de fechar no mesmo dia.
+      </>
+    ),
+  },
+  {
+    q: "Onde vocês ficam?",
+    a: (
+      <>
+        {CLINIC.addressLine} — {CLINIC.addressComplement} — {CLINIC.city}, CEP {CLINIC.zip}.
+        Atendimento de {CLINIC.hours.toLowerCase()}. Pacientes de outras cidades recebem orientação
+        de logística e dos retornos pós-operatórios pelo WhatsApp {CLINIC.phoneDisplay}.
+      </>
+    ),
+  },
+];
+
+export function Faq() {
+  const [open, setOpen] = useState<number | null>(0);
+
+  return (
+    <section id="duvidas" className="border-b border-border bg-card">
+      <div className="mx-auto max-w-4xl px-5 py-16 md:px-10 md:py-24">
+        <p className="eyebrow">Dúvidas frequentes</p>
+        <h2 className="mt-3 text-[2rem] md:text-[3.1rem]">
+          As cinco perguntas que travam a decisão.
+        </h2>
+        <p className="mt-4 text-[0.95rem] leading-relaxed text-muted-foreground">
+          Cada resposta aponta para uma prova nesta mesma página.
+        </p>
+
+        <div className="mt-8 border-t border-border">
+          {QA.map((item, i) => {
+            const on = open === i;
+            return (
+              <div key={item.q} className="border-b border-border">
+                <button
+                  type="button"
+                  aria-expanded={on}
+                  onClick={() => setOpen(on ? null : i)}
+                  className="flex min-h-14 w-full items-start justify-between gap-6 py-5 text-left text-[1.05rem] font-medium text-ink"
+                >
+                  {item.q}
+                  <span className="mt-0.5 shrink-0 text-xl leading-none font-light text-rose">
+                    {on ? "–" : "+"}
+                  </span>
+                </button>
+                {on && (
+                  <div className="pb-6 text-[0.92rem] leading-relaxed text-muted-foreground">
+                    {item.a}
+                  </div>
+                )}
+              </div>
+            );
+          })}
+        </div>
+      </div>
+    </section>
+  );
+}

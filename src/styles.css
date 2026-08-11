@@ -1,0 +1,154 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system — Instituto Ramoniê
+ * Identidade: creme/blush quente, rosé-coral do logo, tinta marrom profunda,
+ * dourado de apoio. Títulos em serifa editorial (Cormorant Garamond),
+ * corpo em Jost. Todas as cores em oklch.
+ */
+
+@theme inline {
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-blush: var(--blush);
+  --color-cream: var(--cream);
+  --color-rose: var(--rose);
+  --color-rose-soft: var(--rose-soft);
+  --color-gold: var(--gold);
+  --color-success: var(--success);
+  --color-alert: var(--alert);
+  --font-display: "Cormorant Garamond", Georgia, serif;
+  --font-sans: "Jost", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --shadow-soft: 0 18px 50px -20px oklch(0.35 0.06 30 / 0.28);
+  --shadow-card: 0 1px 2px oklch(0.35 0.06 30 / 0.06), 0 12px 30px -18px oklch(0.35 0.06 30 / 0.22);
+}
+
+:root {
+  --radius: 0.75rem;
+
+  --ink: oklch(0.31 0.031 40);
+  --ink-soft: oklch(0.51 0.024 40);
+  --cream: oklch(0.985 0.008 60);
+  --blush: oklch(0.958 0.019 45);
+  --rose: oklch(0.68 0.086 35);
+  --rose-soft: oklch(0.93 0.031 40);
+  --gold: oklch(0.72 0.098 80);
+  --success: oklch(0.55 0.09 155);
+  --alert: oklch(0.56 0.15 35);
+
+  --background: var(--cream);
+  --foreground: var(--ink);
+  --card: oklch(1 0 0);
+  --card-foreground: var(--ink);
+  --popover: oklch(1 0 0);
+  --popover-foreground: var(--ink);
+  --primary: var(--rose);
+  --primary-foreground: oklch(0.995 0.004 60);
+  --secondary: var(--blush);
+  --secondary-foreground: var(--ink);
+  --muted: var(--blush);
+  --muted-foreground: var(--ink-soft);
+  --accent: var(--rose-soft);
+  --accent-foreground: oklch(0.45 0.08 35);
+  --destructive: oklch(0.55 0.17 28);
+  --destructive-foreground: oklch(0.99 0.004 60);
+  --border: oklch(0.905 0.014 45);
+  --input: oklch(0.905 0.014 45);
+  --ring: var(--rose);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 1.08;
+    letter-spacing: -0.01em;
+  }
+}
+
+@utility eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.625rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+
+@utility surface-blush {
+  background-image: linear-gradient(180deg, var(--cream), var(--blush));
+}
+
+@utility petal-glow {
+  background-image: radial-gradient(
+    60% 60% at 70% 30%,
+    oklch(0.93 0.031 40 / 0.9),
+    transparent 70%
+  );
+}
+
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@utility ticker-track {
+  display: inline-block;
+  white-space: nowrap;
+  animation: ticker 32s linear infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
+}
