@@ -1,6 +1,16 @@
 {
   "rewrites": [
-    { "source": "/calculadoramarketplaces", "destination": "/calculadoramarketplaces/index.html" },
-    { "source": "/(.*)", "destination": "/index.html" }
+    {
+      "source": "/calculadoramarketplaces",
+      "destination": "/calculadoramarketplaces/index.html"
+    },
+    {
+      "source": "/taxashotmartover",
+      "destination": "/taxashotmartover/index.html"
+    },
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
   ]
 }
