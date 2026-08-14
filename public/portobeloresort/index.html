@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portobelo Resort | Lotes em Porto Maringá — Marilena/PR</title>
+<meta name="description" content="Lotes em condomínio resort no encontro dos rios Paraná e Paranapanema. Marina, piscinas, quadras e academia. Porto Maringá, Marilena – PR.">
+<meta property="og:title" content="Portobelo Resort — Porto Maringá, Marilena/PR">
+<meta property="og:description" content="Seu lote no encontro dos rios Paraná e Paranapanema. Obra em execução.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&family=Jost:wght@200;300;400;500&family=Parisienne&display=swap" rel="stylesheet">
+
+
+<style>
+:root{
+  --paper:#FFFFFF; --sand:#F6F3EE; --sand-2:#EDE8E0;
+  --ink:#15181A; --ink-2:#3E4448; --muted:#847E76; --line:#E3DDD3;
+  --gold:#A98C4E; --wa:#1FA855;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{background:var(--paper);color:var(--ink);font-family:'Jost',system-ui,sans-serif;
+  font-weight:300;font-size:17px;line-height:1.68;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+
+.wrap{width:100%;max-width:1200px;margin:0 auto;padding:0 clamp(20px,5vw,56px)}
+.mid{max-width:880px;margin:0 auto}
+
+.eyebrow{font-size:11.5px;font-weight:400;letter-spacing:.34em;text-transform:uppercase;
+  color:var(--gold);display:block;margin-bottom:18px}
+h2{font-weight:300;font-size:clamp(30px,4.4vw,48px);line-height:1.14;letter-spacing:-.012em}
+h3{font-weight:400;font-size:21px;letter-spacing:-.005em;line-height:1.3}
+p{color:var(--ink-2);font-weight:300}
+.lead{font-size:clamp(16.5px,1.6vw,18.5px);color:var(--ink-2);max-width:62ch;margin-top:22px}
+.center{text-align:center}
+.center .lead{margin-left:auto;margin-right:auto}
+section{padding:clamp(72px,10vw,132px) 0}
+.sand{background:var(--sand)}
+
+/* ---------- wordmark ---------- */
+.mark{line-height:1;display:inline-block;text-align:center}
+.mark .b{display:block;font-family:'Cormorant Garamond',serif;font-weight:400;
+  font-size:25px;letter-spacing:.26em;text-transform:uppercase;padding-left:.26em}
+.mark .c{display:block;font-family:'Parisienne',cursive;font-size:19px;
+  margin-top:2px;opacity:.9}
+
+/* ---------- header ---------- */
+header{position:fixed;top:0;left:0;right:0;z-index:80;padding:18px 0;color:#fff;
+  transition:background .3s ease,color .3s ease,padding .3s ease,box-shadow .3s ease}
+header.solid{background:rgba(255,255,255,.96);color:var(--ink);padding:10px 0;
+  box-shadow:0 1px 0 var(--line);backdrop-filter:saturate(180%) blur(8px)}
+header .bar{display:flex;align-items:center;justify-content:space-between;gap:24px}
+nav{display:none;gap:30px;font-size:14px;letter-spacing:.04em;font-weight:400}
+nav a{opacity:.86}nav a:hover{opacity:1}
+.hdr-cta{display:inline-flex;align-items:center;gap:9px;font-size:13.5px;letter-spacing:.04em;
+  border:1px solid currentColor;border-radius:999px;padding:9px 18px;opacity:.9;white-space:nowrap;
+  transition:background .2s,color .2s}
+header.solid .hdr-cta:hover{background:var(--ink);color:#fff;border-color:var(--ink)}
+@media(min-width:1020px){nav{display:flex}}
+@media(max-width:700px){.hdr-cta{display:none}header{padding:14px 0}.mark .b{font-size:21px}.mark .c{font-size:16px}}
+
+/* ---------- hero ---------- */
+.hero{position:relative;height:100svh;min-height:620px;display:flex;flex-direction:column;justify-content:flex-end}
+.hero-media{position:absolute;inset:0;overflow:hidden;background:#2A3330}
+.hero-media img{width:100%;height:100%;object-fit:cover;object-position:center 42%}
+/* scrim em três camadas: topo para o menu, base para o texto, lateral para o contraste */
+.hero-media::after{content:"";position:absolute;inset:0;background:
+  linear-gradient(180deg,rgba(10,14,16,.46) 0%,rgba(10,14,16,.06) 22%,rgba(10,14,16,0) 42%,rgba(10,14,16,.55) 74%,rgba(10,14,16,.88) 100%),
+  linear-gradient(90deg,rgba(10,14,16,.52) 0%,rgba(10,14,16,.16) 42%,rgba(10,14,16,0) 68%)}
+.hero-in{position:relative;z-index:2;color:#fff;padding-bottom:clamp(34px,5vw,58px)}
+.hero h1{font-weight:200;font-size:clamp(37px,5.6vw,66px);line-height:1.06;letter-spacing:-.02em;
+  max-width:14ch;margin-top:22px;text-shadow:0 2px 40px rgba(0,0,0,.45)}
+.hero h1 em{font-style:normal;font-family:'Cormorant Garamond',serif;font-weight:300}
+.hero .sub{color:rgba(255,255,255,.9);font-size:clamp(16px,1.6vw,18.5px);max-width:44ch;margin-top:18px;
+  text-shadow:0 1px 24px rgba(0,0,0,.5)}
+.hero-actions{display:flex;flex-wrap:wrap;gap:13px;margin-top:30px}
+.hero .eyebrow{text-shadow:0 1px 20px rgba(0,0,0,.5)}
+@media(max-width:900px){.hero-media img{object-position:center 46%}}
+.subnav{position:relative;z-index:2;border-top:1px solid rgba(255,255,255,.24);padding:17px 0;color:rgba(255,255,255,.92)}
+.subnav .wrap{display:flex;gap:clamp(18px,4vw,44px);font-size:12.5px;letter-spacing:.16em;
+  text-transform:uppercase;overflow-x:auto;scrollbar-width:none}
+.subnav .wrap::-webkit-scrollbar{display:none}
+.subnav a{white-space:nowrap;padding-bottom:3px;border-bottom:1px solid transparent}
+.subnav a:hover{border-color:rgba(255,255,255,.7)}
+
+/* ---------- botões ---------- */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;
+  padding:15px 30px;border-radius:999px;font-family:inherit;font-size:14.5px;font-weight:400;
+  letter-spacing:.06em;cursor:pointer;border:1px solid transparent;
+  transition:background .22s,color .22s,border-color .22s,transform .18s}
+.btn:active{transform:scale(.988)}
+.btn-solid{background:var(--ink);color:#fff}.btn-solid:hover{background:var(--gold)}
+.btn-light{background:#fff;color:var(--ink)}.btn-light:hover{background:var(--gold);color:#fff}
+.btn-ghost{border-color:currentColor;color:inherit}.btn-ghost:hover{background:rgba(255,255,255,.16)}
+.btn-wa{background:var(--wa);color:#fff}.btn-wa:hover{background:#17904A}
+.btn-wide{width:100%}
+
+/* ---------- media ---------- */
+.shot{border-radius:26px;overflow:hidden;background:var(--sand-2);border:1px solid var(--line)}
+.shot img{width:100%;height:auto}
+.split{display:grid;grid-template-columns:1fr;gap:clamp(30px,5vw,72px);align-items:center}
+@media(min-width:900px){.split{grid-template-columns:1fr 1fr}.split.rev .col-a{order:2}}
+
+/* ---------- números ---------- */
+.threes{display:grid;grid-template-columns:1fr;margin-top:56px;border-top:1px solid var(--line)}
+@media(min-width:860px){.threes{grid-template-columns:repeat(3,1fr)}}
+.three{padding:34px 0;border-bottom:1px solid var(--line)}
+@media(min-width:860px){.three{padding:38px 38px 42px;border-bottom:0;border-right:1px solid var(--line)}
+ .three:first-child{padding-left:0}.three:last-child{border-right:0;padding-right:0}}
+.three .num{font-family:'Cormorant Garamond',serif;font-size:15px;letter-spacing:.2em;color:var(--gold);display:block;margin-bottom:16px}
+.three h3{margin-bottom:10px}
+.three p{font-size:15.5px;line-height:1.7}
+
+/* ---------- estrutura ---------- */
+.amen{display:grid;grid-template-columns:repeat(2,1fr);margin-top:48px;border-top:1px solid var(--line)}
+@media(min-width:760px){.amen{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1060px){.amen{grid-template-columns:repeat(5,1fr)}}
+.amen div{padding:22px 6px;border-bottom:1px solid var(--line);font-size:15px;color:var(--ink-2)}
+
+/* ---------- galeria ---------- */
+.gal{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:52px}
+@media(min-width:820px){.gal{grid-template-columns:repeat(3,1fr);gap:20px}}
+.gal figure{border-radius:20px;overflow:hidden;background:var(--sand-2);border:1px solid var(--line);position:relative}
+.gal img{width:100%;height:100%;object-fit:cover;aspect-ratio:4/3;transition:transform .5s ease}
+.gal figure:hover img{transform:scale(1.04)}
+.gal figcaption{position:absolute;left:0;right:0;bottom:0;padding:26px 16px 12px;color:#fff;
+  font-size:12.5px;letter-spacing:.12em;text-transform:uppercase;
+  background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.62))}
+
+/* ---------- obra ---------- */
+.status-list{margin-top:48px;border-top:1px solid var(--line)}
+.sit{display:flex;gap:22px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.sit .tag{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);
+  width:130px;flex:0 0 130px;display:flex;align-items:center;gap:8px}
+.sit .tag i{width:5px;height:5px;border-radius:50%;background:var(--gold);display:inline-block;flex:0 0 5px}
+.sit .txt{flex:1;min-width:220px}
+.sit h3{font-size:19px;margin-bottom:4px}
+.sit p{font-size:15px;color:var(--muted)}
+
+/* ---------- form ---------- */
+.form{max-width:460px}
+.f-row{margin-bottom:22px}
+label{display:block;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);margin-bottom:9px}
+input[type=text],select{width:100%;padding:14px 2px;border:0;border-bottom:1px solid var(--line);
+  background:transparent;font-family:inherit;font-size:17px;font-weight:300;color:var(--ink);
+  border-radius:0;outline:none;transition:border-color .2s;-webkit-appearance:none;appearance:none}
+select{background-image:linear-gradient(45deg,transparent 50%,var(--gold) 50%),linear-gradient(135deg,var(--gold) 50%,transparent 50%);
+  background-position:calc(100% - 11px) calc(50% + 1px),calc(100% - 6px) calc(50% + 1px);
+  background-size:5px 5px,5px 5px;background-repeat:no-repeat;padding-right:26px}
+input::placeholder{color:#B6AEA4}
+input:focus,select:focus{border-color:var(--gold)}
+.f-note{font-size:13.5px;color:var(--muted);margin-top:18px;line-height:1.65}
+
+/* ---------- faq ---------- */
+.faq{margin-top:52px;border-top:1px solid var(--line)}
+details{border-bottom:1px solid var(--line)}
+summary{padding:24px 40px 24px 0;cursor:pointer;list-style:none;position:relative;font-size:18px;font-weight:400}
+summary::-webkit-details-marker{display:none}
+summary::after{content:"";position:absolute;right:6px;top:50%;width:11px;height:11px;
+  border-right:1px solid var(--gold);border-bottom:1px solid var(--gold);
+  transform:translateY(-70%) rotate(45deg);transition:transform .22s}
+details[open] summary::after{transform:translateY(-30%) rotate(-135deg)}
+details p{padding:0 0 26px;font-size:16px;color:var(--muted);max-width:70ch}
+
+/* ---------- fechamento ---------- */
+.closing{background:var(--ink);color:#fff;text-align:center}
+.closing h2{color:#fff;font-weight:200;max-width:16ch;margin:0 auto}
+.closing .eyebrow{color:#C8A45C}
+.closing p{color:rgba(255,255,255,.72);margin:22px auto 0;max-width:48ch}
+.closing .btn{margin-top:38px}
+footer{background:var(--ink);color:rgba(255,255,255,.55);padding:0 0 60px;font-size:13.5px}
+footer .inner{border-top:1px solid rgba(255,255,255,.13);padding-top:44px;display:grid;grid-template-columns:1fr;gap:26px}
+@media(min-width:820px){footer .inner{grid-template-columns:1fr auto;align-items:end}}
+footer .mark{color:#fff;opacity:.94;text-align:left}
+footer a{color:rgba(255,255,255,.72)}footer a:hover{color:#fff}
+.legal{margin-top:24px;font-size:11.5px;color:rgba(255,255,255,.34);line-height:1.75;max-width:70ch}
+
+/* ---------- whatsapp ---------- */
+.float{position:fixed;right:18px;bottom:18px;z-index:90;display:inline-flex;align-items:center;gap:10px;
+  background:var(--wa);color:#fff;border-radius:999px;padding:14px 22px;font-size:14.5px;letter-spacing:.04em;
+  box-shadow:0 14px 34px -12px rgba(31,168,85,.75);transition:transform .2s}
+.float:hover{transform:translateY(-2px)}
+.float svg{width:19px;height:19px;fill:currentColor;flex:0 0 19px}
+@media(max-width:520px){.float{left:16px;right:16px;justify-content:center;bottom:14px}}
+</style>
+
+<!-- ============================================================
+     >>> COLAR PIXEL E GA AQUI ANTES DE SUBIR VERBA <<<
+     Estas páginas são arquivos estáticos: NÃO herdam o pixel
+     por rota do app React do clientes.overdash.
+       [ ] Meta Pixel (fbq init + PageView)
+       [ ] Google Tag / GA4
+       [ ] evento Contact ou Lead no clique de WhatsApp
+     Rastreio provisório: cada CTA já manda um código de origem
+     no texto do WhatsApp ([LP-HERO], [LP-FORM], [BIO-TABELA]...).
+     ============================================================ -->
+</head>
+<body>
+
+<header id="hd">
+  <div class="wrap bar">
+    <a href="#top" class="mark"><span class="b">Portobelo</span><span class="c">Resort</span></a>
+    <nav>
+      <a href="#resort">O Resort</a>
+      <a href="#estrutura">Estrutura</a>
+      <a href="#projeto">Projeto</a>
+      <a href="#local">Localização</a>
+      <a href="#contato">Contato</a>
+    </nav>
+    <a class="hdr-cta" href="#contato">Falar com a corretora</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-media">
+    <picture>
+      <source media="(max-width:900px)" srcset="/portobeloresort/img/hero-m.webp">
+      <img fetchpriority="high" src="/portobeloresort/img/hero-d.webp" alt="Entrada do Portobelo Resort ao entardecer">
+    </picture>
+  </div>
+  <div class="hero-in">
+    <div class="wrap">
+      <span class="eyebrow" style="color:rgba(255,255,255,.8)">Porto Maringá &nbsp;·&nbsp; Marilena — PR</span>
+      <h1>Seu lote no <em>encontro</em> de dois rios</h1>
+      <p class="sub">Condomínio resort no encontro dos rios Paraná e Paranapanema. Marina, piscinas, quadras e academia dentro de casa.</p>
+      <div class="hero-actions">
+        <a class="btn btn-light" href="#contato">Receber valores e metragens</a>
+        <a class="btn btn-ghost" href="#resort">Conhecer o empreendimento</a>
+      </div>
+    </div>
+  </div>
+  <div class="subnav"><div class="wrap">
+    <a href="#resort">O Resort</a><a href="#estrutura">Estrutura</a>
+    <a href="#projeto">Projeto</a><a href="#obra">A obra</a><a href="#local">Localização</a>
+  </div></div>
+</section>
+
+<!-- O RESORT -->
+<section id="resort">
+  <div class="wrap mid center">
+    <span class="eyebrow">O empreendimento</span>
+    <h2>Conheça o Portobelo</h2>
+    <p class="lead">Um condomínio pensado para receber a família com o lazer de um resort e a segurança de um residencial — em Porto Maringá, distrito de Marilena, no noroeste do Paraná.</p>
+  </div>
+  <div class="wrap" style="margin-top:clamp(44px,6vw,72px)">
+    <div class="shot"><img loading="lazy" decoding="async" src="/portobeloresort/img/wide.webp" alt="Vista da área de lazer do Portobelo Resort"></div>
+  </div>
+  <div class="wrap">
+    <div class="threes">
+      <div class="three"><span class="num">01</span><h3>Segunda casa</h3>
+        <p>O fim de semana da família a poucas horas de casa. Sem hotel, sem reserva, sem alta temporada — a casa é sua e está sempre pronta.</p></div>
+      <div class="three"><span class="num">02</span><h3>Vida náutica</h3>
+        <p>Marina dentro do condomínio, no encontro de dois rios. Para quem tem barco, ou pretende ter, e hoje depende de rampa pública.</p></div>
+      <div class="three"><span class="num">03</span><h3>Investimento</h3>
+        <p>Lote em empreendimento com infraestrutura em implantação e acesso asfáltico em obra. Consulte as condições da fase atual.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ESTRUTURA -->
+<section class="sand" id="estrutura">
+  <div class="wrap">
+    <div class="split">
+      <div class="col-a"><div class="shot"><img loading="lazy" decoding="async" src="/portobeloresort/img/estrut.webp" alt="Piscina do Portobelo Resort"></div></div>
+      <div class="col-b">
+        <span class="eyebrow">Estrutura</span>
+        <h2>Um resort que você não precisa devolver no domingo</h2>
+        <p class="lead">A estrutura de lazer prevista para o Portobelo reúne, dentro do condomínio, o que hoje exige viagem, reserva e diária.</p>
+      </div>
+    </div>
+    <div class="amen">
+      <div>Piscinas</div><div>Marina</div><div>Quadras de tênis</div><div>Campos de futebol</div>
+      <div>Parques infantis</div><div>Academia</div><div>Mini mercados</div><div>Salões</div>
+      <div>Lagos</div><div>Muita natureza</div>
+    </div>
+  </div>
+</section>
+
+<!-- GALERIA -->
+<section id="projeto">
+  <div class="wrap mid center">
+    <span class="eyebrow">O projeto</span>
+    <h2>O que está sendo construído</h2>
+    <p class="lead">Imagens do projeto do Portobelo Resort.</p>
+  </div>
+  <div class="wrap">
+    <div class="gal">
+      <figure><img loading="lazy" decoding="async" src="/portobeloresort/img/g1.webp" alt="Portaria"><figcaption>Portaria</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/portobeloresort/img/g2.webp" alt="Piscina e deck"><figcaption>Piscinas e deck</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/portobeloresort/img/g3.webp" alt="Academia"><figcaption>Academia</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/portobeloresort/img/g4.webp" alt="Quadras"><figcaption>Quadras</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/portobeloresort/img/g5.webp" alt="Campo de futebol"><figcaption>Campo de futebol</figcaption></figure>
+      <figure><img loading="lazy" decoding="async" src="/portobeloresort/img/g6.webp" alt="Parque infantil"><figcaption>Parque infantil</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<!-- OBRA -->
+<section class="sand" id="obra">
+  <div class="wrap mid">
+    <span class="eyebrow">A obra hoje</span>
+    <h2>Não é só maquete. Está saindo do chão.</h2>
+    <p class="lead">A dúvida de quem compra lote raramente é o preço. É se o empreendimento sai do papel. Estas são as frentes já executadas.</p>
+    <div class="status-list">
+      <div class="sit">
+        <span class="tag"><i></i> Em execução</span>
+        <div class="txt"><h3>Asfalto Marilena → Porto Maringá</h3><p>Trecho de ligação em obra, encurtando o acesso ao empreendimento.</p></div>
+      </div>
+      <div class="sit">
+        <span class="tag"><i></i> Instalado</span>
+        <div class="txt"><h3>Portões de entrada</h3><p>Controle de acesso do condomínio já montado na entrada principal.</p></div>
+      </div>
+      <div class="sit">
+        <span class="tag"><i></i> Plantado</span>
+        <div class="txt"><h3>Paisagismo da frente</h3><p>Plantio concluído na fachada e no acesso ao Portobelo.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LOCALIZAÇÃO -->
+<section id="local">
+  <div class="wrap">
+    <div class="split">
+      <div class="col-a"><div class="shot"><img loading="lazy" decoding="async" src="/portobeloresort/img/local.webp" alt="Implantação do Portobelo Resort"></div></div>
+      <div class="col-b">
+        <span class="eyebrow">Localização</span>
+        <h2>Porto Maringá, Marilena — PR</h2>
+        <p class="lead">No encontro dos rios Paraná e Paranapanema, no noroeste do Paraná. O acesso asfáltico ligando Marilena a Porto Maringá está em obra, encurtando o trajeto de quem vem da região de Maringá.</p>
+        <div style="margin-top:32px">
+          <a class="btn btn-solid" href="https://www.google.com/maps/search/Porto+Maring%C3%A1+Marilena+PR" target="_blank" rel="noopener">Abrir no Google Maps</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTATO -->
+<section class="sand" id="contato">
+  <div class="wrap">
+    <div class="split rev">
+      <div class="col-a">
+        <span class="eyebrow">Valores e metragens</span>
+        <h2>Fale com a corretora</h2>
+        <p class="lead" style="margin-bottom:38px">As metragens e as condições variam por quadra e por posição dentro do condomínio. Diga o que você procura e a tabela atualizada chega no seu WhatsApp.</p>
+        <div class="form">
+          <div class="f-row"><label for="nome">Seu nome</label>
+            <input type="text" id="nome" placeholder="Como podemos te chamar?" autocomplete="name"></div>
+          <div class="f-row"><label for="obj">O que você procura</label>
+            <select id="obj">
+              <option value="uma segunda casa para a família">Segunda casa para a família</option>
+              <option value="um lote com foco em lazer náutico e marina">Lazer náutico / marina</option>
+              <option value="um lote como investimento">Investimento</option>
+              <option value="ainda estou pesquisando">Ainda estou pesquisando</option>
+            </select></div>
+          <button class="btn btn-wa btn-wide" onclick="abrirWhats()">
+            <svg viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1s-.5-.2-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5l-.9-2.2c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6 2.6 1 3.1.8 3.7.8s1.7-.7 2-1.4c.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2"/></svg>
+            Receber a tabela no WhatsApp
+          </button>
+          <p class="f-note">Você fala direto com <b style="font-weight:500;color:var(--ink)">Pamela Aline</b> — (44) 99103-8477.<br>Sem cadastro, sem e-mail, sem ligação surpresa.</p>
+        </div>
+      </div>
+      <div class="col-b"><div class="shot"><img loading="lazy" decoding="async" src="/portobeloresort/img/contato.webp" alt="Área de lazer do Portobelo Resort"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section>
+  <div class="wrap mid">
+    <span class="eyebrow">Dúvidas</span>
+    <h2>Perguntas frequentes</h2>
+    <div class="faq">
+      <details open><summary>Qual o valor e a metragem dos lotes?</summary>
+        <p>Metragens e condições variam por quadra e por posição no condomínio. A tabela atualizada é enviada pelo WhatsApp — é só pedir no formulário acima.</p></details>
+      <details><summary>Onde fica exatamente o Portobelo?</summary>
+        <p>Em Porto Maringá, distrito de Marilena — PR, no encontro dos rios Paraná e Paranapanema.</p></details>
+      <details><summary>Como está a obra hoje?</summary>
+        <p>Asfalto ligando Marilena a Porto Maringá em execução, portões de entrada instalados e paisagismo plantado na frente do condomínio.</p></details>
+      <details><summary>Dá para visitar antes de decidir?</summary>
+        <p>Sim. A visita é agendada com a corretora Pamela Aline pelo WhatsApp (44) 99103-8477.</p></details>
+      <details><summary>Quais as formas de pagamento?</summary>
+        <p>Informação a confirmar com o empreendimento.</p></details>
+      <details><summary>Quando a infraestrutura fica pronta?</summary>
+        <p>Cronograma a confirmar com o empreendimento.</p></details>
+      <details><summary>Existe taxa condominial?</summary>
+        <p>Valor e itens inclusos a confirmar com o empreendimento.</p></details>
+    </div>
+  </div>
+</section>
+
+<!-- FECHAMENTO -->
+<section class="closing">
+  <div class="wrap mid">
+    <span class="eyebrow">Último passo</span>
+    <h2>O rio já está lá. Falta o seu lote.</h2>
+    <p>Receba a tabela, tire suas dúvidas e agende a visita. Sem compromisso.</p>
+    <a class="btn btn-wa" href="https://wa.me/5544991038477?text=Ol%C3%A1%21%20%5BLP-FINAL%5D%20Quero%20falar%20sobre%20os%20lotes%20do%20Portobelo%20Resort." target="_blank" rel="noopener">Falar com a corretora</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap inner">
+    <div>
+      <span class="mark"><span class="b">Portobelo</span><span class="c">Resort</span></span>
+      <p class="legal">Imagens de projeto são ilustrativas e podem sofrer alteração sem aviso prévio. Valores, metragens, prazos e condições sujeitos a confirmação e disponibilidade.</p>
+    </div>
+    <div style="line-height:2">
+      <a href="https://wa.me/5544991038477" target="_blank" rel="noopener">(44) 99103-8477</a><br>
+      <a href="https://www.instagram.com/portobelloresort.residencial/" target="_blank" rel="noopener">@portobelloresort.residencial</a><br>
+      <span style="color:rgba(255,255,255,.4)">Porto Maringá · Marilena — PR · Atendimento: Pamela Aline</span>
+    </div>
+  </div>
+</footer>
+
+<a class="float" href="https://wa.me/5544991038477?text=Ol%C3%A1%21%20%5BLP-FLOAT%5D%20Quero%20saber%20mais%20sobre%20os%20lotes%20do%20Portobelo%20Resort." target="_blank" rel="noopener">
+  <svg viewBox="0 0 24 24"><path d="M17.5 14.4c-.3-.2-1.7-.9-2-1s-.5-.2-.7.1-.8 1-.9 1.2-.3.2-.6.1a8 8 0 0 1-2.4-1.5 9 9 0 0 1-1.6-2.1c-.2-.3 0-.5.1-.6l.5-.6.3-.5v-.5l-.9-2.2c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.1.2 2.1 3.3 5.2 4.6 2.6 1 3.1.8 3.7.8s1.7-.7 2-1.4c.2-.7.2-1.3.2-1.4-.1-.2-.3-.3-.6-.4M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2m0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2"/></svg>
+  Falar no WhatsApp
+</a>
+
+<script>
+var hd=document.getElementById('hd');
+function onScroll(){hd.classList.toggle('solid',window.scrollY>window.innerHeight*0.82)}
+window.addEventListener('scroll',onScroll,{passive:true});onScroll();
+function abrirWhats(){
+  var nome=(document.getElementById('nome').value||'').trim();
+  var obj=document.getElementById('obj').value;
+  var msg='Olá! [LP-FORM] ';
+  if(nome) msg+='Meu nome é '+nome+'. ';
+  msg+='Estou procurando '+obj+' e quero receber a tabela de valores e metragens do Portobelo Resort.';
+  window.open('https://wa.me/5544991038477?text='+encodeURIComponent(msg),'_blank');
+}
+document.getElementById('nome').addEventListener('keydown',function(e){if(e.key==='Enter')abrirWhats()});
+</script>
+</body>
+</html>
