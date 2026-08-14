@@ -1,16 +1,1 @@
-{
-  "rewrites": [
-    {
-      "source": "/calculadoramarketplaces",
-      "destination": "/calculadoramarketplaces/index.html"
-    },
-    {
-      "source": "/taxashotmartover",
-      "destination": "/taxashotmartover/index.html"
-    },
-    {
-      "source": "/(.*)",
-      "destination": "/index.html"
-    }
-  ]
-}
+{"rewrites":[{"source":"/calculadoramarketplaces","destination":"/calculadoramarketplaces/index.html"},{"source":"/taxashotmartover","destination":"/taxashotmartover/index.html"},{"source":"/portobeloresort","destination":"/portobeloresort/index.html"},{"source":"/portobeloresortbio","destination":"/portobeloresortbio/index.html"},{"source":"/(.*)","destination":"/index.html"}]}
