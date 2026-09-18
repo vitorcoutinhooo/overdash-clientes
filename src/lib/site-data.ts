@@ -14,9 +14,25 @@ export const CLINIC = {
     "R.+Santos+Dumont+3196+Zona+01+Maring%C3%A1+PR+87013-050",
 } as const;
 
+/**
+ * Código curto de origem, lido das UTMs da URL do anúncio.
+ * Vai junto na mensagem do WhatsApp para que a conversa que chega no Kommo
+ * possa ser casada com o anúncio que a trouxe. Sem isso, toda conversa chega
+ * idêntica e a origem se perde na passagem do site para o WhatsApp.
+ */
+function origemDaVisita(): string {
+  if (typeof window === "undefined") return "site";
+  const p = new URLSearchParams(window.location.search);
+  const partes = [p.get("utm_source"), p.get("utm_campaign"), p.get("utm_content")]
+    .filter(Boolean)
+    .map((v) => (v as string).slice(0, 24));
+  return partes.length ? `site · ${partes.join("/")}` : "site";
+}
+
 export function wa(message: string) {
+  const texto = `${message}\n\n(vim pelo ${origemDaVisita()})`;
   return `https://api.whatsapp.com/send/?phone=${CLINIC.whatsapp}&text=${encodeURIComponent(
-    message,
+    texto,
   )}&type=phone_number&app_absent=0`;
 }
 
